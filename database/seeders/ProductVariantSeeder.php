@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductVariant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class ProductVariantSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ProductVariant::factory()->count(40)->create();
     }
 }

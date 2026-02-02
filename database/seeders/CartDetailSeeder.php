@@ -2,16 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Cart;
+use App\Models\CartDetail;
+use App\Models\ProductVariant;
 use Illuminate\Database\Seeder;
 
 class CartDetailSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        CartDetail::factory()->count(50)->create();
     }
 }
