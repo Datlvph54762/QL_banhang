@@ -21,10 +21,10 @@ class ProductVariantFactory extends Factory
     {
         return [
             'product_id' => Product::inRandomOrder()->value('id'),
-            'color_id' => Color::inRandomOrder()->value('id'),
             'size_id' => Size::inRandomOrder()->value('id'),
+            'color_id' => Color::inRandomOrder()->value('id'),
             'image' => 'variants/default.png',
-            'price' => fake()->numberBetween(100000, 1000000),
+            'price' => fake()->numberBetween(100000, 500000),
             'sale' => fake()->numberBetween(0, 30),
             'quantity' => fake()->numberBetween(1, 100),
         ];

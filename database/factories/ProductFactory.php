@@ -19,12 +19,11 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         $name = fake()->words(3, true);
-        
+
         return [
             'category_id' => Category::inRandomOrder()->value('id'),
             'product_code' => fake()->unique()->bothify('SP###'),
             'name' => $name,
-            'slug' => Str::slug($name),
             'image' => 'products/default.png',
             'description' => fake()->paragraph(),
             'material' => fake()->word(),
