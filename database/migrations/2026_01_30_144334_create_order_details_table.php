@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->decimal('price', 12, 2);
             $table->integer('quantity');
             $table->string('status')->default('pending');
-            $table->string('estimated_delivery')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });
