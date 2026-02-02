@@ -17,7 +17,7 @@ class SizeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->randomElement(['S', 'M', 'L', 'XL', 'XXL']),
         ];
     }
 }
