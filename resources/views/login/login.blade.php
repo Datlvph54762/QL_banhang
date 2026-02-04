@@ -17,29 +17,54 @@
 <body>
     <div class="container">
         <div class="login px-5 py-4 shadow-lg bg-light">
-            <div class="text_title">
-                <h2 class="fw-4">SignIn</h2>
-                <p>Enter your credentials to access your account</p>
-            </div>
-            <div class="form_input">
-                <input type="text" class=" input form-control my-3 " placeholder="Email Address">
-                <input type="password" class=" input form-control my-3" placeholder="password">
-            </div>
-            <div class="form_helper d-flex ">
-                <div class="form-helper_remember">
-                    <input type="checkbox">
-                    <label for="">Remember me</label>
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+                <div class="text_title">
+                    <h2 class="fw-4">Sign In</h2>
+                    <p>Enter your credentials to access your account</p>
                 </div>
-                <div class="form-helper_forgot">
-                    <a href="#" class="forgot">Forgot password!</a>
+
+                @if ($errors->any())
+                    <div class="alert alert-danger text-start">
+                        <ul class="mb-0 mt-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="form_input">
+                    <div class="form-group text-start my-3">
+                        <input type="text" name="email" class=" input form-control  " value="{{ old('email') }}"
+                            placeholder="Email Address">
+                        @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group text-start my-3">
+                        <input type="password" name="password" class=" input form-control " placeholder="password">
+                        @error('password')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-            </div>
-            <div class="submit">
-                <button class="btn btn-primary w-100 my-4">Sign In</button>
-            </div>
-            <div class="signup_link">
-                <p>Don't have an account? <a href="#" class="link">Create one</a></p>
-            </div>
+                <div class="form_helper d-flex ">
+                    <div class="form-helper_remember">
+                        <input type="checkbox">
+                        <label for="">Remember me</label>
+                    </div>
+                    <div class="form-helper_forgot">
+                        <a href="#" class="forgot">Forgot password!</a>
+                    </div>
+                </div>
+                <div class="submit">
+                    <button class="btn btn-primary w-100 my-4">Sign In</button>
+                </div>
+                <div class="signup_link">
+                    <p>Don't have an account? <a href="#" class="link">Create one</a></p>
+                </div>
+            </form>
         </div>
     </div>
 </body>
