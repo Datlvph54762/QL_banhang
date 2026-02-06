@@ -3,7 +3,7 @@
         Adminator</div>
     <div class="nav flex-column py-3  ">
         <a href="#" class="nav-link text-muted fw-bold  "><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="#" class="nav-link text-muted fw-bold"><i class="fas fa-box"></i> Quản lý Danh mục</a>
+        <a href="{{ route('admin.categories.index') }}" class="nav-link text-muted fw-bold"><i class="fas fa-box"></i> Quản lý Danh mục</a>
         <a href="#" class="nav-link text-muted fw-bold"><i class="fas fa-box"></i> Quản lý Sản phẩm</a>
         <a href="#" class="nav-link text-muted fw-bold"><i class="fas fa-shopping-cart"></i> Đơn hàng</a>
         <!-- <a href="#" class="nav-link text-muted fw-bold"><i class="fas fa-chart-bar"></i> Báo cáo doanh thu</a> -->
