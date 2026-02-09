@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,5 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('admin.cat
 //Product
 Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
 
+//Order
+Route::get('/orders',[OrderController::class, 'index'])->name('admin.orders.index');
