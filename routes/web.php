@@ -20,6 +20,7 @@ Route::get('/dashboard', function () {
 //Categories
 // Route::resource('categories', CategoryController::class);
 Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
 
 //Product
 Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');

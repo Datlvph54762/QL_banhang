@@ -6,7 +6,7 @@
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
             <h5 class="m-0 fw-bold text-primary">Danh sách Danh mục</h5>
-            <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Thêm mới</a>
+            <a href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Thêm mới</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
