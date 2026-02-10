@@ -17,4 +17,8 @@ class CategoryService
         return $this->categoryRepo->getAll();
     }
 
+    public function create($data){
+        return $this->categoryRepo->create($data);
+    }
+
 }

@@ -11,14 +11,19 @@
             </a>
         </div>
         <div class="card-body">
-            <form action="" method="post" >
+            <form action="{{ route('admin.categories.store') }}" method="POST" >
+                @csrf
+
                 <div class="col-12 mb-3">
                     <label class="form-label fw-bold">Tên danh mục</label>
                     <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục">
+                    @error('name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label fw-bold">Mô tả</label>
-                    <textarea name="description" rows="4" class="form-control" placeholder="Nhập mô tả sản phẩm"></textarea>
+                    <textarea name="description" rows="4" class="form-control" placeholder="Nhập mô tả sản phẩm">{{ old('description') }}</textarea>
                 </div>
 
                 <div class="text-end">
