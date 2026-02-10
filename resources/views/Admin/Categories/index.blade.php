@@ -35,7 +35,7 @@
                                 <td>{{ $category->name }}</td>
                                 <td><span>{{ $category->description }}</span></td>
                                 <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-outline-warning" title="Sửa">
+                                    <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-outline-warning" title="Sửa">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-outline-danger" title="Xóa"

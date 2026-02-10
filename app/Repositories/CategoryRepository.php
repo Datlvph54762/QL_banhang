@@ -11,7 +11,21 @@ class CategoryRepository
         return Category::all();
     }
 
-    public function create($data){
+    public function create($data)
+    {
         return Category::create($data);
     }
+
+    public function findById($id)
+    {
+        return Category::findOrFail($id);
+    }
+
+    public function update($id, $data)
+    {
+        $category= Category::findOrFail($id);
+        
+        return $category->update($data);
+    }
+    
 }

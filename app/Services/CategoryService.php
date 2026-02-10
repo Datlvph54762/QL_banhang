@@ -17,8 +17,18 @@ class CategoryService
         return $this->categoryRepo->getAll();
     }
 
-    public function create($data){
+    public function create($data)
+    {
         return $this->categoryRepo->create($data);
+    }
+    public function findById($id)
+    {
+        return $this->categoryRepo->findById($id);
+    }
+
+    public function update($id, $data)
+    {
+        return $this->categoryRepo->update($id, $data);
     }
 
 }

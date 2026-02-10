@@ -39,7 +39,27 @@ class CategoryController extends Controller
 
         $this->categoryService->create($data);
 
-        return redirect()->route('admin.categories.index')->with('success','Thêm mới thành công');
+        return redirect()->route('admin.categories.index')->with('success', 'Thêm mới thành công');
+
+    }
+
+    public function edit($id)
+    {
+        $category = $this->categoryService->findById($id);
+
+        return view('admin.categories.edit', compact('category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        $this->categoryService->update($id, $data);
+
+        return redirect()->route('admin.categories.index')->with('success', 'Cập nhật thành công');
 
     }
 }
