@@ -7,6 +7,6 @@ class OrderRepository
 {
     public function getAll()
     {
-        return Order::all();
+        return Order::orderBy('id', 'desc')->get();
     }
 }

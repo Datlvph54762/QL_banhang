@@ -8,7 +8,7 @@ class CategoryRepository
 {
     public function getAll()
     {
-        return Category::all();
+        return Category::orderBy('id','desc')->get();
     }
 
     public function create($data)
@@ -24,7 +24,7 @@ class CategoryRepository
     public function update($id, $data)
     {
         $category= Category::findOrFail($id);
-        
+
         return $category->update($data);
     }
     

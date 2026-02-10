@@ -7,7 +7,7 @@ class ProductRepository
 {
     public function getAll()
     {
-        return Product::all();
+        return Product::orderBy('id', 'desc')->get();
     }
     public function getAllWithCategory(){
         return Product::with('category')->get();
