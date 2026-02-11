@@ -26,6 +26,8 @@
 
     //Product
     Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/product', [ProductController::class, 'store'])->name('admin.products.store');
 
     //Order
     Route::get('/orders',[OrderController::class, 'index'])->name('admin.orders.index');

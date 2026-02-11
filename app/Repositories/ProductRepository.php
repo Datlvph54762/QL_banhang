@@ -12,4 +12,8 @@ class ProductRepository
     public function getAllWithCategory(){
         return Product::with('category')->get();
     }
+
+    public function create($data){
+        return Product::create($data);
+    }
 }
