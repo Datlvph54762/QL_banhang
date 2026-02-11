@@ -18,7 +18,18 @@ class ProductService
         return $this->productRepo->getAll();
     }
 
-    public function create($data){
+    public function create($data)
+    {
+        if (isset($data['image'])) {
+            $data['image'] = $this->uploadImage($data['image']);
+        };
         return $this->productRepo->create($data);
+    }
+
+    private function uploadImage($file)
+    {
+        $path = $file->store('product', 'public');
+
+        return $path;
     }
 }
