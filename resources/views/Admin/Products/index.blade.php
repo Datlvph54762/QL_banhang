@@ -53,7 +53,7 @@
                                     <a href="#" class="btn btn-sm btn-outline-warning" title="Show_variant">
                                         <i class="fa-solid fa-layer-group"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-outline-warning" title="Sửa">
+                                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-outline-warning" title="Sửa">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-outline-danger" title="Xóa"

@@ -27,7 +27,9 @@
     //Product
     Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');
-    Route::post('/product', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::post('/products', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('admin.products.update');
 
     //Order
     Route::get('/orders',[OrderController::class, 'index'])->name('admin.orders.index');
