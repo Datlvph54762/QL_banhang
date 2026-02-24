@@ -1,8 +1,9 @@
-    <?php
+<?php
 
     use App\Http\Controllers\admin\CategoryController;
     use App\Http\Controllers\admin\OrderController;
     use App\Http\Controllers\admin\ProductController;
+    use App\Http\Controllers\admin\ProductVariant;
     use App\Http\Controllers\AuthController;
     use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,9 @@
     Route::post('/products', [ProductController::class, 'store'])->name('admin.products.store');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('admin.products.update');
+
+    //Variant
+    Route::get('/products/{id}/variants', [ProductVariant::class, 'index'])->name('admin.products.productVariants.index');
 
     //Order
     Route::get('/orders',[OrderController::class, 'index'])->name('admin.orders.index');
