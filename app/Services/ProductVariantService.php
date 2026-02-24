@@ -14,4 +14,8 @@ class ProductVariantService{
     public function getByProduct($id){
         return $this->productVariantRepo->getByProduct($id);
     }
+
+    public function create($data){
+        return $this->productVariantRepo->create($data);
+    } 
 }
