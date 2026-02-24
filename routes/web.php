@@ -34,6 +34,7 @@
 
     //Variant
     Route::get('/products/{id}/variants', [ProductVariant::class, 'index'])->name('admin.products.productVariants.index');
-
+    Route::get('/variants/create', [ProductVariant::class, 'create'])->name('admin.products.productVariants.create');
+    
     //Order
     Route::get('/orders',[OrderController::class, 'index'])->name('admin.orders.index');
