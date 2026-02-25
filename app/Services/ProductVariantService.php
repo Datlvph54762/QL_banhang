@@ -16,6 +16,16 @@ class ProductVariantService{
     }
 
     public function create($data){
+        if(isset($data['image'])){
+            $data['image'] = $this->uploadImage($data['image']);
+        }
         return $this->productVariantRepo->create($data);
     } 
+
+    private function uploadImage($file)
+    {
+        $path = $file->store('Variants', 'public');
+
+        return $path;
+    }
 }
