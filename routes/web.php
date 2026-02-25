@@ -32,9 +32,10 @@
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('admin.products.update');
 
-    //Variant
+    //Variant   
     Route::get('/products/{id}/variants', [ProductVariant::class, 'index'])->name('admin.products.productVariants.index');
-    Route::get('/variants/create', [ProductVariant::class, 'create'])->name('admin.products.productVariants.create');
+    Route::get('/products/{id}/variants/create', [ProductVariant::class, 'create'])->name('admin.products.productVariants.create');
+    Route::post('/store', [ProductVariant::class, 'store'])->name('admin.products.productVariants.store');
     
     //Order
     Route::get('/orders',[OrderController::class, 'index'])->name('admin.orders.index');

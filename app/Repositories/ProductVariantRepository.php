@@ -10,15 +10,18 @@ class ProductVariantRepository
         return ProductVariant::where('product_id', $id)->get();
     }
 
-    public function getByWithColor(){
+    public function getByWithColor()
+    {
         return ProductVariant::with('color')->get();
     }
 
-    public function getByWithSize(){
+    public function getByWithSize()
+    {
         return ProductVariant::with('size')->get();
     }
 
-    public function create($data){
-        return ProductVariant::created($data);
+    public function create($data)
+    {
+        return ProductVariant::create($data);
     }
 }
