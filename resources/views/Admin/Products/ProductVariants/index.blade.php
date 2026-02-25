@@ -50,7 +50,7 @@
                                 <td>{{ $variant->color->name }}</td>
                                 <td>{{ $variant->size->name }}</td>
                                 <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-outline-warning" title="Sửa">
+                                    <a href="{{ route('admin.products.productVariants.edit', $variant->id) }}" class="btn btn-sm btn-outline-warning" title="Sửa">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-outline-danger" title="Xóa"
