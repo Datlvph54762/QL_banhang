@@ -7,7 +7,7 @@ class ProductVariantRepository
 {
     public function getByProduct($id)
     {
-        return ProductVariant::where('product_id', $id)->get();
+        return ProductVariant::orderBy('id', 'desc')->where('product_id', $id)->get();
     }
 
     public function getByWithColor()
