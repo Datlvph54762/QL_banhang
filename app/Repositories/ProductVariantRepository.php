@@ -24,4 +24,15 @@ class ProductVariantRepository
     {
         return ProductVariant::create($data);
     }
+
+    public function findId($id){
+        return ProductVariant::findOrFail($id);
+    }
+
+    public function update($id, $data)
+    {
+        $productVariant = ProductVariant::findOrFail($id);
+
+        return $productVariant->updated($data);
+    }
 }

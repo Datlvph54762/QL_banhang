@@ -73,4 +73,12 @@ class ProductVariant extends Controller
 
         return redirect()->route('admin.products.productVariants.index', $data['product_id'])->with('success','Thêm biến thể thành công');
     }
+
+    public function edit($id){
+        $productVariant = $this->productVarriantService->findId($id);
+        $colors = $this->colorService->getAllColor();
+        $sizes = $this->sizeService->getAllSize();
+
+        return view('admin.products.productVariants.edit', compact('productVariant','colors', 'sizes'));
+    }
 }
