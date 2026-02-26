@@ -33,6 +33,6 @@ class ProductVariantRepository
     {
         $productVariant = ProductVariant::findOrFail($id);
 
-        return $productVariant->updated($data);
+        return $productVariant->update($data);
     }
 }

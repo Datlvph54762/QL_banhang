@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\ProductVariantRepository;
+use Illuminate\Support\Facades\Storage;
 
 class ProductVariantService
 {
@@ -41,6 +42,13 @@ class ProductVariantService
     public function update($id, $data)
     {
         $productVariant= $this->productVariantRepo->findId($id);
+
+        if(isset($data['image'])){
+            if($productVariant->image && Storage::disk('public')->exists($productVariant->image)){
+                Storage::disk('public')->delete($productVariant->image);
+            }
+            $data['image']= $data['image']->store('variant','public');
+        }
 
         return $this->productVariantRepo->update($id, $data);
     }

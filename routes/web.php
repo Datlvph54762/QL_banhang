@@ -37,6 +37,7 @@
     Route::get('/products/{id}/variants/create', [ProductVariant::class, 'create'])->name('admin.products.productVariants.create');
     Route::post('/store', [ProductVariant::class, 'store'])->name('admin.products.productVariants.store');
     Route::get('/variants/{id}/edit', [ProductVariant::class, 'edit'])->name('admin.products.productVariants.edit');
+    Route::put('/variants/{id}', [ProductVariant::class, 'update'])->name('admin.products.productVariants.update');
     
     //Order
     Route::get('/orders',[OrderController::class, 'index'])->name('admin.orders.index');

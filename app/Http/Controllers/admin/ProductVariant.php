@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ProductVariant extends Controller
 {
-    protected $productVarriantService;
+    protected $productVariantService;
     protected $colorService;
     protected $sizeService;
 
@@ -19,26 +19,26 @@ class ProductVariant extends Controller
 
     public function __construct(ProductVariantService $productVariantService, ColorService $colorService, SizeService $sizeService, ProductService $productService)
     {
-        $this->productVarriantService = $productVariantService;
+        $this->productVariantService = $productVariantService;
         $this->colorService = $colorService;
         $this->sizeService = $sizeService;
-        $this->productService= $productService;
+        $this->productService = $productService;
     }
 
     public function index($id)
     {
-        $productVariant = $this->productVarriantService->getByProduct($id);
-        $product= $this->productService->findId($id);
+        $productVariant = $this->productVariantService->getByProduct($id);
+        $product = $this->productService->findId($id);
 
-        return view('admin.products.productVariants.index', compact('productVariant','product'));
+        return view('admin.products.productVariants.index', compact('productVariant', 'product'));
     }
 
     public function create($id)
     {
-        $product= $this->productService->findId($id);
+        $product = $this->productService->findId($id);
         $colors = $this->colorService->getAllColor();
         $sizes = $this->sizeService->getAllSize();
-        return view('admin.products.productVariants.create', compact('product','colors', 'sizes'));
+        return view('admin.products.productVariants.create', compact('product', 'colors', 'sizes'));
     }
 
     public function store(Request $request)
@@ -69,16 +69,51 @@ class ProductVariant extends Controller
             ]
         );
 
-        $this->productVarriantService->create($data);
+        $this->productVariantService->create($data);
 
-        return redirect()->route('admin.products.productVariants.index', $data['product_id'])->with('success','Thêm biến thể thành công');
+        return redirect()->route('admin.products.productVariants.index', $data['product_id'])->with('success', 'Thêm biến thể thành công');
     }
 
-    public function edit($id){
-        $productVariant = $this->productVarriantService->findId($id);
+    public function edit($id)
+    {
+        $productVariant = $this->productVariantService->findId($id);
         $colors = $this->colorService->getAllColor();
         $sizes = $this->sizeService->getAllSize();
 
-        return view('admin.products.productVariants.edit', compact('productVariant','colors', 'sizes'));
+        return view('admin.products.productVariants.edit', compact('productVariant', 'colors', 'sizes'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate(
+            [
+                'product_id' => 'required|exists:products,id',
+                'color_id' => 'required|exists:colors,id',
+                'size_id' => 'required|exists:sizes,id',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+                'quantity' => 'required|integer|min:0',
+                'price' => 'required|numeric|min:0',
+                'sale' => 'nullable|numeric|min:0|lte:price',
+            ],
+            [
+                'price.required' => 'Giá không được để trống.',
+                'price.numeric' => 'Giá phải là số.',
+                'price.min' => 'Giá phải từ 0 trở lên.',
+                'sale.numeric' => 'Giá khuyến mãi phải là số.',
+                'sale.min' => 'Giá khuyến mãi phải từ 0 trở lên.',
+                'sale.lte' => 'Giá khuyến mãi không được lớn hơn giá gốc.',
+                'quantity.required' => 'Số lượng không được để trống.',
+                'quantity.integer' => 'Số lượng phải là số nguyên.',
+                'quantity.min' => 'Số lượng không được âm.',
+                'image.image' => 'File tải lên phải là hình ảnh.',
+                'image.mimes' => 'Ảnh phải có định dạng: jpeg, png, jpg, webp.',
+                'image.max' => 'Dung lượng ảnh tối đa là 2MB.'
+            ]
+        );
+        
+        $this->productVariantService->update($id, $data);
+        
+        return redirect()->route('admin.products.productVariants.index', $data['product_id'])
+            ->with('success', 'Cập nhật biến thể thành công!!');
     }
 }
