@@ -5,7 +5,7 @@ use App\Models\Product;
 
 class ProductRepository
 {
-    public function getAll($search=null)
+    public function getAll($search = null)
     {
         return Product::orderBy('id', 'desc')
             ->when($search, function ($query) use ($search) {
@@ -25,7 +25,8 @@ class ProductRepository
 
     public function findId($id)
     {
-        return Product::findOrFail($id);
+        return Product::with(['category', 'variant.color', 'variant.size'])
+            ->findOrFail($id);
     }
 
     public function update($id, $data)

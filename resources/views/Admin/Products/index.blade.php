@@ -51,17 +51,17 @@
                                 <td>{{ $product->material }}</td>
                                 <td class="text-end">
                                     <a href="{{ route('admin.products.productVariants.index', $product->id) }}"
-                                        class="btn btn-sm btn-outline-warning" title="Show_variant">
+                                        class="btn btn-sm btn-outline-danger" title="Show_variant">
                                         <i class="fa-solid fa-layer-group"></i>
                                     </a>
                                     <a href="{{ route('admin.products.edit', $product->id) }}"
                                         class="btn btn-sm btn-outline-warning" title="Sửa">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Xóa"
-                                        onclick="return confirm('Bác có chắc muốn xóa không?')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <a href="{{ route('admin.products.show', $product->id) }}"
+                                        class="btn btn-sm btn-outline-success" title="show">
+                                        <i class="fas fa-eye"></i></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

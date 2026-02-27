@@ -89,4 +89,10 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')->with('success', 'Cập nhật sp thành công');
     }
+
+    public function show($id){
+        $product= $this->productService->findId($id);
+
+        return view('admin.products.show',compact('product'));
+    }
 }
