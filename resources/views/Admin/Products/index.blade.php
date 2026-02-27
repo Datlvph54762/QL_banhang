@@ -10,7 +10,7 @@
                 mới</a>
         </div>
         <div class="card-body">
-            
+
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <ul class="mb-0">
@@ -50,10 +50,12 @@
                                 </td>
                                 <td>{{ $product->material }}</td>
                                 <td class="text-end">
-                                    <a href="{{ route('admin.products.productVariants.index', $product->id) }}" class="btn btn-sm btn-outline-warning" title="Show_variant">
+                                    <a href="{{ route('admin.products.productVariants.index', $product->id) }}"
+                                        class="btn btn-sm btn-outline-warning" title="Show_variant">
                                         <i class="fa-solid fa-layer-group"></i>
                                     </a>
-                                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-outline-warning" title="Sửa">
+                                    <a href="{{ route('admin.products.edit', $product->id) }}"
+                                        class="btn btn-sm btn-outline-warning" title="Sửa">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-outline-danger" title="Xóa"
@@ -68,5 +70,7 @@
             </div>
         </div>
     </div>
-
+    <div class="mt-3 d ">
+        {{ $products->links() }}
+    </div>
 @endsection

@@ -14,9 +14,9 @@ class ProductService
         $this->productRepo = $productRepository;
     }
 
-    public function getAllProduct()
+    public function getAllProduct($search=null)
     {
-        return $this->productRepo->getAll();
+        return $this->productRepo->getAll($search);
     }
 
     public function create($data)

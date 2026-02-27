@@ -1,11 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light py-3 px-2">
     <div class="container-fluid">
         <button class="btn btn-outline-secondary btn-sm" id="menu-toggle"><i class="fas fa-bars"></i></button>
-        <div class="input-search col-3 d-flex px-4 gap-2">
+        <!-- <div class="input-search col-3 d-flex px-4 gap-2">
             <input type="" class="form-control">
             <button class="btn btn-primary"><i class="fa fa-search"></i></button>
 
-        </div>
+        </div> -->
+        <form action="" method="GET" class="d-flex px-4">
+            <input type="text" name="search" value="{{ request('search') }}" class="form-control w-100" 
+                placeholder="Tìm kiếm...">
+            <button type="submit" class="btn btn-primary mx-2   ">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
 
         <div class="ms-auto d-flex align-items-center">
 

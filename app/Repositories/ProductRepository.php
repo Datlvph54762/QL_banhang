@@ -5,9 +5,13 @@ use App\Models\Product;
 
 class ProductRepository
 {
-    public function getAll()
+    public function getAll($search=null)
     {
-        return Product::orderBy('id', 'desc')->get();
+        return Product::orderBy('id', 'desc')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->paginate(10);
     }
     public function getAllWithCategory()
     {
