@@ -5,7 +5,9 @@
     use App\Http\Controllers\admin\ProductController;
     use App\Http\Controllers\admin\ProductVariant;
     use App\Http\Controllers\AuthController;
-    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\admin\account\UserAdminController;
+use Database\Factories\UserFactory;
+use Illuminate\Support\Facades\Route;
 
     // Route::get('/', function () {
     //     return view('login.login');
@@ -42,3 +44,6 @@
     
     //Order
     Route::get('/orders',[OrderController::class, 'index'])->name('admin.orders.index');
+
+    //Account
+    Route::get('/users', [UserAdminController::class,'index'])->name('admin.accounts.users.index');
