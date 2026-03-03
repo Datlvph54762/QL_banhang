@@ -19,6 +19,19 @@
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
+                <div class="col-12 mb-3 ps-2">
+                    <label class="form-label fw-bold">Vai trò</label>
+                    <select name="category_id" id="category_id" class="form-select form-control">
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
+                                {{ $role->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
                 <div class="col-12 mb-3 ">
                     <label class="form-label fw-bold">Email</label>
                     <input type="text" name="email" class="form-control" placeholder="Nhập địa chỉ email">
