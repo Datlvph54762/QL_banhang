@@ -8,4 +8,8 @@ class StaffAdminRepository{
     public function getStaff(){
         return User::orderBy('id', 'desc')->where('role_id',2)->get();
     }
+
+    public function create(){
+        return User::create();
+    }
 }

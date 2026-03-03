@@ -19,4 +19,8 @@ class StaffAdminController extends Controller
 
         return view('admin.accounts.staffs.index', compact('staffs'));
     }
+
+    public function create(){
+        return view('admin.accounts.staffs.create');
+    }
 }

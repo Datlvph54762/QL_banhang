@@ -17,4 +17,8 @@ class StaffAdminService
     {
         return $this->staffAdminRepo->getStaff();
     }
+
+    public function create(){
+        return $this->staffAdminRepo->create();
+    }
 }
