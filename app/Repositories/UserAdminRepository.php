@@ -6,6 +6,6 @@ use App\Models\User;
 
 class UserAdminRepository{
     public function getUser(){
-        return User::orderBy('id','desc') ->where('role_id',2)->get();
+        return User::orderBy('id','desc') ->where('role_id',3)->get();
     }
 }
