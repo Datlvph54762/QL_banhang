@@ -9,7 +9,7 @@ class StaffAdminRepository{
         return User::with('role')->orderBy('id', 'desc')->whereIn('role_id',[2,4,5])->get();
     }
 
-    public function create(){
-        return User::create();
+    public function create($data){
+        return User::create($data);
     }
 }

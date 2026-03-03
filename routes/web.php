@@ -51,4 +51,5 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/staffs', [StaffAdminController::class,'index'])->name('admin.accounts.staffs.index');
     Route::get('/staffs/create', [StaffAdminController::class,'create'])->name('admin.accounts.staffs.create');
+    Route::post('/store', [StaffAdminController::class,'store'])->name('admin.accounts.staffs.store');
 
