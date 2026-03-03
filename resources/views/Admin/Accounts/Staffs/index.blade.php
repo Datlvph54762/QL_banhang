@@ -5,7 +5,7 @@
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
             <h5 class="m-0 fw-bold text-primary">Danh sách Staffs</h5>
-            <a href="" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Thêm
+            <a href="{{ route('admin.accounts.staffs.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Thêm
                 mới</a>
         </div>
         <div class="card-body">
