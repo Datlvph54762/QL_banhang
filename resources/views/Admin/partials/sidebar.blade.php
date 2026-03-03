@@ -24,7 +24,7 @@
                 <a href="{{ route('admin.accounts.users.index') }}" class="nav-link text-muted py-1 fw-bold small py-3">
                     <i class="fas fa-user"></i> Khách hàng
                 </a>
-                <a href="" class="nav-link text-muted py-1 fw-bold small py-3">
+                <a href="{{ route('admin.accounts.staffs.index') }}" class="nav-link text-muted py-1 fw-bold small py-3">
                     <i class="fas fa-user-tie"></i> Nhân viên (Staff)
                 </a>
                 <a href="" class="nav-link text-muted py-1 fw-bold small py-3">

@@ -1,6 +1,7 @@
 <?php
 
-    use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\account\StaffAdminController;
+use App\Http\Controllers\admin\CategoryController;
     use App\Http\Controllers\admin\OrderController;
     use App\Http\Controllers\admin\ProductController;
     use App\Http\Controllers\admin\ProductVariant;
@@ -47,3 +48,6 @@ use Illuminate\Support\Facades\Route;
 
     //Account
     Route::get('/users', [UserAdminController::class,'index'])->name('admin.accounts.users.index');
+
+    Route::get('/staffs', [StaffAdminController::class,'index'])->name('admin.accounts.staffs.index');
+
