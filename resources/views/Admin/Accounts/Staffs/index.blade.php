@@ -18,7 +18,7 @@
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Password</th>
-                            <th scope="col">Adrress</th>
+                            <th scope="col">Vai trò</th>
                             <th scope="col">status</th>
                             <th scope="col" class="text-end">Active</th>
                         </tr>
@@ -34,7 +34,7 @@
                                     {{ Str::limit($staff->password, 25, '...') }}
                                 </td>
                                 <td>
-                                    {{ $staff->address }}
+                                    {{ $staff->role->name }}
                                 </td>
                                 <td>
                                     @if($staff->status)
