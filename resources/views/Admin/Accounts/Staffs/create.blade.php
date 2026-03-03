@@ -9,32 +9,41 @@
             </a>
         </div>
         <div class="card-body">
-            <form action="" method="POST" enctype="multipart/form-data">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form action="{{ route('admin.accounts.staffs.store') }}" method="POST">
                 @csrf
 
                 <div class="col-12 mb-3">
-                    <label class="form-label fw-bold">Tên nhân viên</label>
-                    <input type="text" name="name" class="form-control" placeholder="Nhập tên nhân viên">
+                    <label class="form-label fw-bold">Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Nhập tên nhân viên" value="{{ old('name') }}">
                     @error('name')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
-                <div class="col-12 mb-3 ps-2">
-                    <label class="form-label fw-bold">Vai trò</label>
-                    <select name="category_id" id="category_id" class="form-select form-control">
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-bold">Roles</label>
+                    <select name="role_id" id="role_id" class="form-select form-control">
                         @foreach($roles as $role)
                             <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
                                 {{ $role->name }}
                             </option>
                         @endforeach
                     </select>
-                    @error('category_id')
+                    @error('role_id')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="col-12 mb-3 ">
                     <label class="form-label fw-bold">Email</label>
-                    <input type="text" name="email" class="form-control" placeholder="Nhập địa chỉ email">
+                    <input type="text" name="email" class="form-control" placeholder="Nhập địa chỉ email" value="{{ old('email') }}">
                     @error('email')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
@@ -43,18 +52,25 @@
                 <div class="d-flex">
                     <div class="col-6 mb-3 pe-2">
                         <label class="form-label fw-bold">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="**********">
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                            placeholder="**********">
                         @error('password')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+
                     <div class="col-6 mb-3 ps-2">
-                        <label class="form-label fw-bold">Phone</label>
-                        <input type="text" name="phone" class="form-control" placeholder="Nhập phone">
-                        @error('phone')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                        <label class="form-label fw-bold">Password_confirmation</label>
+                        <input type="password" name="password_confirmation"
+                            class="form-control @error('password') is-invalid @enderror" placeholder="Nhập lại mật khẩu">
                     </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-bold">Phone</label>
+                    <input type="text" name="phone" class="form-control" placeholder="Nhập phone" value="{{ old('phone') }}">
+                    @error('phone')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label fw-bold">Address</label>
