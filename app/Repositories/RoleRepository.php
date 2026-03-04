@@ -19,6 +19,11 @@ class RoleRepository{
         return Role::create($data);
     }
 
+    public function syncPermissions($role, array $permissionIds) {
+        // Hàm sync sẽ tự động insert các id vào bảng trung gian
+        return $role->permissions()->sync($permissionIds);
+    }
+
     //Permission
     public function getPermission(){
         return Permission::all();

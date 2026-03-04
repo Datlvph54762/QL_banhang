@@ -59,5 +59,6 @@ use Illuminate\Support\Facades\Route;
     //Role-permission
     Route::get('/roles-permission', [RoleAdminController::class,'index'])->name('admin.accounts.roles-permission.index');
     Route::get('/roles-permission/create', [RoleAdminController::class,'create'])->name('admin.accounts.roles-permission.create');
+    Route::post('/roles-permission/store', [RoleAdminController::class,'store'])->name('admin.accounts.roles-permission.store');
     
 

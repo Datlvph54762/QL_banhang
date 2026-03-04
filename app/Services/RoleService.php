@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\RoleRepository;
+use Illuminate\Support\Facades\DB;
 
 class RoleService{
     protected $roleRepo;
@@ -19,7 +20,18 @@ class RoleService{
         return $this->roleRepo->findId($id);
     }
     public function create($data){
-        return $this->roleRepo->create($data);
+        return DB::transaction(function () use ($data) {
+            $role = $this->roleRepo->create([
+                'name' => $data['name']
+            ]);
+
+            // 2. Lưu các quyền vào bảng trung gian (Dùng mảng ID quyền từ Form)
+            if (!empty($data['permissions'])) {
+                $this->roleRepo->syncPermissions($role, $data['permissions']);
+            }
+                
+            return $role;
+        });
     }
 
     //Permission

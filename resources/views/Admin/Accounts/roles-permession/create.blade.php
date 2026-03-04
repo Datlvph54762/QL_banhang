@@ -11,7 +11,7 @@
             </a>
         </div>
         <div class="card-body">
-            <form action="" method="POST">
+            <form action="{{ route('admin.accounts.roles-permission.store') }}" method="POST">
                 @csrf
                 <div class="mb-3 fw-bold">
                     <label>Tên vai trò:</label>
