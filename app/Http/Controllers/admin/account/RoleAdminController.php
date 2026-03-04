@@ -18,4 +18,9 @@ class RoleAdminController extends Controller
 
         return view('admin.accounts.roles-permession.index', compact('roles'));
     }
+
+    public function create(){
+        $permissions= $this->roleService->getAllPermission();
+        return view('admin.accounts.roles-permession.create', compact('permissions'));
+    }
 }

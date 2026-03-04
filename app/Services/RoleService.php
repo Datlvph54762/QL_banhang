@@ -18,4 +18,12 @@ class RoleService{
     public function findById($id){
         return $this->roleRepo->findId($id);
     }
+    public function create($data){
+        return $this->roleRepo->create($data);
+    }
+
+    //Permission
+    public function getAllPermission(){
+        return $this->roleRepo->getPermission();
+    }
 }
