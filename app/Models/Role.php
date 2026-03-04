@@ -9,4 +9,8 @@ class Role extends Model
 {
     /** @use HasFactory<\Database\Factories\RoleFactory> */
     use HasFactory;
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class, 'permission_role','role_id' ,'permission_id');
+    }
 }

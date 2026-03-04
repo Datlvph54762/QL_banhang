@@ -27,8 +27,8 @@
                 <a href="{{ route('admin.accounts.staffs.index') }}" class="nav-link text-muted py-1 fw-bold small py-3">
                     <i class="fas fa-user-tie"></i> Nhân viên (Staff)
                 </a>
-                <a href="" class="nav-link text-muted py-1 fw-bold small py-3">
-                    <i class="fas fa-key"></i> Phân quyền
+                <a href="{{ route('admin.accounts.roles-permission.index') }}" class="nav-link text-muted py-1 fw-bold small py-3">
+                    <i class="fas fa-key"></i> Vai trò phân quyền
                 </a>
             </div>
         </div>

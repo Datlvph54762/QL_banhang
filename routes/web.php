@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\account\RoleAdminController;
 use App\Http\Controllers\admin\account\StaffAdminController;
 use App\Http\Controllers\admin\CategoryController;
     use App\Http\Controllers\admin\OrderController;
@@ -54,4 +55,8 @@ use Illuminate\Support\Facades\Route;
     Route::post('/store', [StaffAdminController::class,'store'])->name('admin.accounts.staffs.store');
     Route::get('/staffs/{id}/edit', [StaffAdminController::class,'edit'])->name('admin.accounts.staffs.edit');
     Route::put('/staffs/{id}', [StaffAdminController::class,'update'])->name('admin.accounts.staffs.update');
+
+    //Role-permission
+    Route::get('/roles-permission', [RoleAdminController::class,'index'])->name('admin.accounts.roles-permission.index');
+    
 
