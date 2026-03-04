@@ -54,4 +54,11 @@ class StaffAdminController extends Controller
 
         return redirect()->route('admin.accounts.staffs.index')->with('success','Thêm danh sách Staff thành công');
     }
+
+    public function edit($id){
+        $user= $this->staffAdminService->findById($id);
+        $roles= $this->roleService->getAllRole();
+
+        return view('admin.accounts.staffs.edit', compact('roles','user'));
+    }
 }
