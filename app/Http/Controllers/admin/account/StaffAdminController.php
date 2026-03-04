@@ -61,4 +61,25 @@ class StaffAdminController extends Controller
 
         return view('admin.accounts.staffs.edit', compact('roles','user'));
     }
+
+    public function update(Request $request, $id){
+        $data = $request->validate([
+            'role_id' => 'required|exists:roles,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'password' => 'required|string|min:8|confirmed',
+            'address' => 'nullable|string|max:500',
+        ], [
+            'email.required' => 'Email không đc để trống',
+            'phone.required' => 'Số điện thoại không được để trống.',
+            'phone.regex' => 'Số điện thoại không đúng định dạng.',
+            'password.confirmed' => 'Mật khẩu xác nhận không khớp.',
+        ]);
+
+        $this->staffAdminService->update($id, $data);
+
+        return redirect()->route('admin.accounts.staffs.index')->with('success','Cập nhật thành công');
+
+    }
 }

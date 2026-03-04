@@ -18,7 +18,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="" method="POST">
+            <form action="{{ route('admin.accounts.staffs.update', $user->id) }}" method="POST">
                 @csrf
                 @method('PUt')
 
