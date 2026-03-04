@@ -44,6 +44,9 @@
                                     @endif
                                 </td>
                                 <td class="text-end">
+                                    <a href="{{ route('admin.accounts.staffs.edit',$staff->id) }}" class="btn btn-sm btn-outline-warning" title="Sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                     <a href=""
                                         class="btn btn-sm btn-outline-success" title="show">
                                         <i class="fas fa-eye"></i></i>
