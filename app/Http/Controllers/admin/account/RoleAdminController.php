@@ -45,4 +45,20 @@ class RoleAdminController extends Controller
 
         return view('admin.accounts.roles-permession.edit', compact('permissions','role'));
     }
+
+    public function update(Request $request , $id){
+        $data = $request->validate([
+            'name' => 'required|max:255',
+            'permissions' => 'required|array', 
+            'permissions.*' => 'exists:permissions,id',
+        ],
+        [
+            'name.required'=>'Tên role khoông được để trống',
+            'permissions.required'=>'Phải chọn ít nhất là 1 quyền',
+        ]);
+
+        $this->roleService->update($id, $data);
+
+        return redirect()->route('admin.accounts.roles-permission.index')->with('success', 'cập nhật vai trò thành công');
+    }
 }

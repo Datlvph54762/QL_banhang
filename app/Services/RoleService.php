@@ -29,7 +29,20 @@ class RoleService{
             if (!empty($data['permissions'])) {
                 $this->roleRepo->syncPermissions($role, $data['permissions']);
             }
-                
+
+            return $role;
+        });
+    }
+
+    public function update($id, $data){
+        return DB::transaction( function() use ($id, $data){
+            $role= $this->roleRepo->findId($id);
+            $role->update(['name'=> $data['name']]);
+
+            if(isset($data['permissions'])){
+                $role->permissions()->sync($data['permissions']);
+            }
+
             return $role;
         });
     }
