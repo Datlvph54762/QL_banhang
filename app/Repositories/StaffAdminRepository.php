@@ -8,7 +8,7 @@ class StaffAdminRepository
 {
     public function getStaff()
     {
-        return User::with('role')->orderBy('id', 'desc')->whereIn('role_id', [2, 4, 5])->get();
+        return User::with('role')->orderBy('id', 'desc')->whereNotIn('role_id', [1,3])->get();
     }
 
     public function create($data)
