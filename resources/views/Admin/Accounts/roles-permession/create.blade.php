@@ -10,7 +10,16 @@
                 <i class="fas fa-arrow-left"></i> Quay lại
             </a>
         </div>
-        <div class="card-body">
+        <div class="card-body">@if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('admin.accounts.roles-permission.store') }}" method="POST">
                 @csrf
                 <div class="mb-3 fw-bold">
