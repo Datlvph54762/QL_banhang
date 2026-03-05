@@ -38,4 +38,11 @@ class RoleAdminController extends Controller
 
         return redirect()->route('admin.accounts.roles-permission.index')->with('success','Tạo mới vai trò và quyền hạn <>');
     }
+
+    public function edit($id){
+        $role= $this->roleService->findById($id);
+        $permissions= $this->roleService->getAllPermission();
+
+        return view('admin.accounts.roles-permession.edit', compact('permissions','role'));
+    }
 }
