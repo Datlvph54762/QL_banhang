@@ -39,7 +39,7 @@
                                     @endforeach
                                 </td>
                                 <td class="text-end">
-                                    <a href="" class="btn btn-sm btn-outline-warning" title="Sửa">
+                                    <a href="{{ route('admin.accounts.roles-permission.edit',$role->id) }}" class="btn btn-sm btn-outline-warning" title="Sửa">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-outline-danger" title="Xóa"

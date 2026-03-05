@@ -60,5 +60,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/roles-permission', [RoleAdminController::class,'index'])->name('admin.accounts.roles-permission.index');
     Route::get('/roles-permission/create', [RoleAdminController::class,'create'])->name('admin.accounts.roles-permission.create');
     Route::post('/roles-permission/store', [RoleAdminController::class,'store'])->name('admin.accounts.roles-permission.store');
+    Route::get('/roles-permission/{id}/edit', [RoleAdminController::class,'edit'])->name('admin.accounts.roles-permission.edit');
+    Route::put('/roles-permission/{id}', [RoleAdminController::class,'update'])->name('admin.accounts.roles-permission.update');
     
 
