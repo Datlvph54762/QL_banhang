@@ -1,0 +1,16 @@
+
+.menu a{
+    color:#198754;
+    transition:0.3s;
+}
+
+.menu a:hover{
+    color:#ea9b3c;
+}
+
+.text-title {
+    color: black;
+}
+.text-title:hover{
+    color:#ea9b3c;
+}

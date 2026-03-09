@@ -72,3 +72,7 @@ Route::prefix('admin')->group(function () {
         });
     });
 });
+
+Route::get('/', function () {
+    return view('client.layout.app'); 
+})->name('client.layout.app');
