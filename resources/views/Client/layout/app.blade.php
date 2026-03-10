@@ -21,7 +21,10 @@
 
         @include('client.partials.nav')
 
-        @include('client.partials.banner')
+        <!-- @include('client.partials.banner') -->
+        <main>
+            @yield('banner')
+        </main>
 
         <main>
             @yield('content')
