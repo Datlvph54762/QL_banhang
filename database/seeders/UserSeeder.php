@@ -20,6 +20,13 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456'),
         ]);
 
+        User::create([
+            'name' => 'Client',
+            'email' => 'client@gmail.com',
+            'password' => Hash::make('123456'),
+            'role_id'=>'3'
+        ]);
+
         User::factory()->count(10)->create();
     }
 }
