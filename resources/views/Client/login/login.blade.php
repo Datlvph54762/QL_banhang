@@ -4,7 +4,11 @@
 
 @section('content')
     <div class="container">
-        <div class="auth-login mx-auto p-5" style="max-width: 700px;">
+        <div class="link-title d-flex mx-5 pt-4 px-4">
+            <a href="{{ route('client.home') }}" class="text-decoration-none text-dark link-success "><p>Trang chủ ></p></a>
+            <a href="" class="text-decoration-none text-success fw-bold"><p class="ms-2" >Đăng nhập tài khoản </p></a>
+        </div>
+        <div class="auth-login mx-auto" style="max-width: 700px;">
             @if($errors->has('login_error'))
                 <div class="alert alert-danger py-2 text-center">
                     {{ $errors->first('login_error') }}
@@ -14,9 +18,9 @@
                 @csrf
 
                 <div class="title-form d-flex justify-content-center align-items-center">
-                    <a href="" class="text-decoration-none text-dark fs-4 fw-bold">Đăng nhập</a>
+                    <a href="{{ route('client.login') }}" class="text-decoration-none text-dark fs-4 fw-bold">Đăng nhập</a>
                     <p class="mx-5 fs-4">|</p>
-                    <a href="" class="text-decoration-none text-dark fs-4">Đăng kí</a>
+                    <a href="{{ route('client.register') }}" class="text-decoration-none text-dark fs-4">Đăng kí</a>
                 </div>
                 <div class="form_input">
                     <div class="form-group text-start my-3">
