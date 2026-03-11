@@ -39,4 +39,8 @@ class AuthClientController extends Controller
             'login_error' => 'Email hoặc mật khẩu không chính xác.',
         ])->withInput($request->only('email'));
     }
+
+    public function showRegister(){
+        return view('client.login.register');
+    }
 }
