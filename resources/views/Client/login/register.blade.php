@@ -17,7 +17,7 @@
                     {{ $errors->first('login_error') }}
                 </div>
             @endif
-            <form action="" method="POST">
+            <form action="{{ route('client.register') }}" method="POST">
                 @csrf
 
                 <div class="title-form d-flex justify-content-center align-items-center">

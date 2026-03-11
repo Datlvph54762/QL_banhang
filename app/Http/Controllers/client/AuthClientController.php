@@ -43,4 +43,38 @@ class AuthClientController extends Controller
     public function showRegister(){
         return view('client.login.register');
     }
+
+    public function createUser(Request $request){
+        $data= $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'nullable|string|max:10',
+            'address' => 'nullable|string|max:255',
+            'password' => 'required|min:6'
+        ], [
+            'name.required' => 'Tên không được để trống',
+            'name.max' => 'Tên không được quá 255 ký tự',
+
+            'email.required' => 'Email không được để trống',
+            'email.email' => 'Email không đúng định dạng',
+            'email.unique' => 'Email đã tồn tại',
+
+            'phone.max' => 'Số điện thoại tối đa 10 ký tự',
+
+            'address.max' => 'Địa chỉ không được quá dài',
+
+            'password.required' => 'Mật khẩu không được để trống',
+            'password.min' => 'Mật khẩu phải ít nhất 6 ký tự'
+        ]);
+
+        $user= $this->authClientService->createUser($data);
+
+        if($user){
+            return redirect()->route('client.login');
+        }
+
+        return back()->with('error','Đã có lỗi xảy ra vui lòng thử lại');
+
+
+    }
 }

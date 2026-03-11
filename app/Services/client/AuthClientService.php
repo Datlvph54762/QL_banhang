@@ -25,4 +25,8 @@ class AuthClientService
         }
         return false;
     }
+
+    public function createUser($data){
+        return $this->authRepo->createUser($data);
+    }
 }

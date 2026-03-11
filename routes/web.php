@@ -82,3 +82,4 @@ Route::get('/',[HomeClientController::class, 'index'])->name('client.home');
 Route::get('/client-login', [AuthClientController::class, 'showLoginClient'])->name('client.login');
 Route::post('/client-login', [AuthClientController::class, 'loginClient']);
 Route::get('/register', [AuthClientController::class, 'showRegister'])->name('client.register');
+Route::post('/register', [AuthClientController::class, 'createUser'])->name('client.register');
