@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductVariant;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\account\UserAdminController;
+use App\Http\Controllers\client\AuthClientController;
 use App\Http\Controllers\HomeClientController;
 use Database\Factories\UserFactory;
 use Illuminate\Support\Facades\Route;
@@ -76,4 +77,7 @@ Route::prefix('admin')->group(function () {
 
 
 
-Route::get('/',[HomeClientController::class, 'index'])->name('home');
+Route::get('/',[HomeClientController::class, 'index'])->name('client.home');
+
+Route::get('/client-login', [AuthClientController::class, 'showLoginClient'])->name('client.login');
+Route::post('/client-login', [AuthClientController::class, 'loginClient']);

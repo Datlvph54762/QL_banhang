@@ -13,7 +13,8 @@
     </div>
 
     <div class="col-3 text-start fs-5">
-        <a href=""><i class="fa-regular fa-user px-3 text-white"></i></a>
-        <a href=""><i class="fa-solid fa-bag-shopping text-white"></i></a>
+        <a href=""><i class="fa-solid fa-bag-shopping px-3 text-white"></i></a>
+        <a href="{{ Route('client.login') }}"><i class="fa-regular fa-user text-white"></i></a>
+        <a href=""><i class="fas fa-sign-out-alt ps-3 text-white"></i></a>
     </div>
 </div>
