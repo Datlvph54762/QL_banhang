@@ -16,6 +16,6 @@ class HomeClientController extends Controller
     public function index(){
         $products= $this->homeService->getAllHome();
 
-        return view('home', compact('products'));
+        return view('client.home', compact('products'));
     }
 }
