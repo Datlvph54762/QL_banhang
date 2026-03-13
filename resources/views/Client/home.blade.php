@@ -24,7 +24,7 @@
                                         height="250">
                                 @endif
                                 <div class="card-body text-start">
-                                    <a href="" class="text-decoration-none ">
+                                    <a href="{{ route('product.show',$product->id)  }}" class="text-decoration-none ">
                                         <h6 class="text-title mt-3 ">{{ $product->name }}</h6>
                                     </a>
                                     <span class="text-danger">{{ number_format($product->sale, 0, ',', '.') }}đ</span>

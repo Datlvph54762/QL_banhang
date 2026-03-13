@@ -14,3 +14,21 @@
 .text-title:hover{
     color:#ea9b3c;
 }
+
+/* Show_Product */
+.btn-mua{
+    background-color: #198754;
+    border-radius: 10px;
+}
+.btn-mua:hover{
+    background-color: #ea9b3c;
+    
+}
+.btn-card button{
+    color: #198754;
+}
+.btn-card:hover{
+    background-color: #ea9b3c;
+    color: aliceblue;
+    border-radius: 10px;
+}

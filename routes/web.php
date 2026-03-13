@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ProductVariant;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\account\UserAdminController;
 use App\Http\Controllers\client\AuthClientController;
+use App\Http\Controllers\client\ProductClientController;
 use App\Http\Controllers\HomeClientController;
 use Database\Factories\UserFactory;
 use Illuminate\Support\Facades\Route;
@@ -83,3 +84,5 @@ Route::get('/client-login', [AuthClientController::class, 'showLoginClient'])->n
 Route::post('/client-login', [AuthClientController::class, 'loginClient']);
 Route::get('/register', [AuthClientController::class, 'showRegister'])->name('client.register');
 Route::post('/register', [AuthClientController::class, 'createUser'])->name('client.register');
+
+Route::get('/product/{id}',[ProductClientController::class, 'showProduct'])->name('product.show');
