@@ -18,6 +18,13 @@ class ProductRepository
         return Product::with('category')->get();
     }
 
+    public function getCategoryShowProduct($id, $excludeId)
+    {
+        return Product::with('category', 'Variant')
+            ->where('category_id', $id)
+            ->where('id', '!=',$excludeId)->get();
+    }
+
     public function create($data)
     {
         return Product::create($data);
