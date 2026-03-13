@@ -20,11 +20,12 @@
                         <div class="col">
                             <div class="cards">
                                 @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top shadow rounded-4"
-                                        height="250">
+                                    <a href="{{ route('product.show', $product->id) }}"><img
+                                            src="{{ asset('storage/' . $product->image) }}" class="card-img-top shadow rounded-4"
+                                            height="250"></a>
                                 @endif
                                 <div class="card-body text-start">
-                                    <a href="{{ route('product.show',$product->id)  }}" class="text-decoration-none ">
+                                    <a href="{{ route('product.show', $product->id)  }}" class="text-decoration-none ">
                                         <h6 class="text-title mt-3 ">{{ $product->name }}</h6>
                                     </a>
                                     <span class="text-danger">{{ number_format($product->sale, 0, ',', '.') }}đ</span>

@@ -16,7 +16,7 @@
         <div class="content">
             <div class="content-title d-flex mx-5 px-4">
                 <div class="image-product col-7">
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="anh" class="w-100 pe-4">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="anh" class="w-100 pe-4" height="600">
                 </div>
                 <div class="title-product col-5">
                     <h3>{{ $product->name }}</h3>

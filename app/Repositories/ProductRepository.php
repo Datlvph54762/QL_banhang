@@ -21,7 +21,7 @@ class ProductRepository
     public function getCategoryShowProduct($id, $excludeId)
     {
         return Product::with('category', 'Variant')
-            ->where('category_id', $id)
+            ->where('category_id', $id)->limit(5)
             ->where('id', '!=',$excludeId)->get();
     }
 
