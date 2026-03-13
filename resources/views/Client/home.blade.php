@@ -20,7 +20,7 @@
                         <div class="col">
                             <div class="cards">
                                 @if($product->image)
-                                    <a href="{{ route('product.show', $product->id) }}"><img
+                                    <a href="{{ route('product.show', $product->id) }}" class="text-decoration-none"><img
                                             src="{{ asset('storage/' . $product->image) }}" class="card-img-top shadow rounded-4"
                                             height="250"></a>
                                 @endif

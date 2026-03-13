@@ -13,7 +13,7 @@
         <div class="card-body d-flex">
             <div class="col-5">
                 @if($product->image)
-                    <img src="{{ asset('storage/' . $product->image) }}" width="550" height="600">
+                    <img src="{{ asset('storage/' . $product->image) }}" width="480" height="600">
                 @endif
             </div>
             <div class="col-7">

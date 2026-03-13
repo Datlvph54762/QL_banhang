@@ -46,7 +46,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ Str::limit($product->description, 50, '...') }}
+                                    {{ Str::limit($product->description, 20, '...') }}
                                 </td>
                                 <td>{{ $product->material }}</td>
                                 <td class="text-end">

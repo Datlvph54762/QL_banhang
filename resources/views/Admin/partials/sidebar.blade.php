@@ -1,4 +1,4 @@
-<div id="sidebar-wrapper" class="bg-light" style="width: 18%;">
+<div id="sidebar-wrapper" class="bg-light" style="width: 20%;">
     <div class="sidebar-heading p-3 fs-4 text-body fw-bold "><i class="fas fa-user-shield text-primary"></i>
         Adminator</div>
     <div class="nav flex-column py-3  ">
