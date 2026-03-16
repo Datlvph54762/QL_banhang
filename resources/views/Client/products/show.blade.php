@@ -8,6 +8,9 @@
             <a href="{{ route('client.home') }}" class="text-decoration-none text-dark link-success ">
                 <p>Trang chủ ></p>
             </a>
+            <a href="{{ route('client.products.index') }}" class="text-decoration-none text-dark link-success">
+                <p class="ms-2"> Sản phẩm  > </p>
+            </a>
             <a href="" class="text-decoration-none text-success fw-bold">
                 <p class="ms-2"> Show </p>
             </a>

@@ -4,7 +4,15 @@
 
 @section('content')
     <div class="container">
-        <div class="content py-5">
+        <div class="link-title d-flex mx-5 pt-4 px-4">
+            <a href="{{ route('client.home') }}" class="text-decoration-none text-dark link-success ">
+                <p>Trang chủ ></p>
+            </a>
+            <a href="" class="text-decoration-none text-success fw-bold">
+                <p class="ms-2"> Sản phẩm </p>
+            </a>
+        </div>
+        <div class="content pb-5">
             <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">
                 @foreach ($products as $product)
                     <div class="col">
