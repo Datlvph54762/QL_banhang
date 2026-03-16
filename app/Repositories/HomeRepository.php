@@ -5,9 +5,12 @@ use App\Models\Product;
 
 class HomeRepository
 {
-    public function getAll()
+    public function getAll($search=null)
     {
-        return Product::with('Variant')->get(); 
+        return Product::with('Variant')->when($search,function($query)use ($search){
+            $query->where('name', 'ILIKE', "%{$search}%");
+        })
+        ->get();    
     }
 
     public function findId($id)

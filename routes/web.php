@@ -85,4 +85,5 @@ Route::post('/client-login', [AuthClientController::class, 'loginClient']);
 Route::get('/register', [AuthClientController::class, 'showRegister'])->name('client.register');
 Route::post('/register', [AuthClientController::class, 'createUser'])->name('client.register');
 
+Route::get('/product-list',[ProductClientController::class, 'index'])->name('client.products.index');
 Route::get('/product/{id}',[ProductClientController::class, 'showProduct'])->name('product.show');

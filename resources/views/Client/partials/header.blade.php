@@ -3,14 +3,13 @@
         <h5 class="fs-1 m-0 fw-bold text-white">STYLEHUB</h5>
     </div>
 
-    <div class="col-6 mx-5">
-        <div class="input-group"> 
-            <input type="text" class="form-control w-50" placeholder="Search...">
-            <button class="btn btn-warning">
+    <form action="{{ route('client.products.index') }}" method="GET" class="d-flex px-4">
+            <input type="text" name="search" value="{{ request('search') }}" class="form-control w-100" 
+                placeholder="Tìm kiếm...">
+            <button type="submit" class="btn btn-primary mx-2   ">
                 <i class="fas fa-search"></i>
             </button>
-        </div>
-    </div>
+    </form>
 
     <div class="col-3 text-start fs-5">
         <a href=""><i class="fa-solid fa-bag-shopping px-3 text-white"></i></a>
