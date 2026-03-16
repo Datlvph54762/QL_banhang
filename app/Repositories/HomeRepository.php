@@ -5,10 +5,13 @@ use App\Models\Product;
 
 class HomeRepository
 {
-    public function getAll($search=null)
+    public function getAll($search=null, $categoryId=null)
     {
         return Product::with('Variant')->when($search,function($query)use ($search){
             $query->where('name', 'ILIKE', "%{$search}%");
+        })
+        ->when($categoryId, function ($query) use($categoryId){
+            $query->where('category_id',$categoryId);
         })
         ->get();    
     }

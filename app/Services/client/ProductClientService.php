@@ -12,8 +12,8 @@ class ProductClientService{
         $this->homeRepo= $homeRepository;
     }
 
-    public function getAllProduct($search=null){
-        return $this->homeRepo->getAll($search);
+    public function getAllProduct($search=null, $categoryId=null){
+        return $this->homeRepo->getAll($search, $categoryId);
     }
 
     public function showProduct($id){
