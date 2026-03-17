@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Services\client\AuthClientService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthClientController extends Controller
 {
@@ -76,5 +77,14 @@ class AuthClientController extends Controller
         return back()->with('error','Đã có lỗi xảy ra vui lòng thử lại');
 
 
+    }
+
+    public function logoutClient(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('client.home');
     }
 }

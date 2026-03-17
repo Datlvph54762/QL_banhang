@@ -84,6 +84,7 @@ Route::get('/client-login', [AuthClientController::class, 'showLoginClient'])->n
 Route::post('/client-login', [AuthClientController::class, 'loginClient']);
 Route::get('/register', [AuthClientController::class, 'showRegister'])->name('client.register');
 Route::post('/register', [AuthClientController::class, 'createUser'])->name('client.register');
+Route::post('/client-logout', [AuthClientController::class, 'logoutClient'])->name('client.logout');
 
 Route::get('/product-list',[ProductClientController::class, 'index'])->name('client.products.index');
 Route::get('/product/{id}',[ProductClientController::class, 'showProduct'])->name('product.show');
