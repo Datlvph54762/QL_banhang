@@ -18,9 +18,12 @@ class AuthService
         $user = $this->userRepo->findByEmail($data['email']);
 
         if ($user && Hash::check($data['password'], $user->password)) {
+            if ($user->role_id == 3) {
+                return 'not_authorized';
+            }
             Auth::login($user);
-            return true;
+            return 'success';
         }
-        return false;
+        return 'wrong_credentials';
     }
 }

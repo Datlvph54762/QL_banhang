@@ -31,8 +31,12 @@ class AuthController extends Controller
 
         $result = $this->authService->checkLogin($request->all());
 
-        if ($result) {
+        if ($result==='success') {
             return redirect()->route('admin.dashboard');
+        }
+
+        if ($result === 'not_authorized') {
+            return back()->withErrors(['error' => 'Tài khoản của bạn không có quyền truy cập trang Quản trị!']);
         }
 
         return back()->withErrors(['error' => 'Incorrect email or password!']);
