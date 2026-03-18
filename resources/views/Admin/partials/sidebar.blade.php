@@ -32,6 +32,14 @@
                 </a>
             </div>
         </div>
-        <a href="#" class="nav-link text-muted fw-bold mt-auto border-0"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+
+        <form action="{{ route('logout') }}" method="POST" class="nav-link ">
+            @csrf
+            <button type="submit" class="text-muted fw-bold mt-auto border-0 button-none">
+                <i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+            </button>
+        </form>
+
+        
     </div>
 </div>

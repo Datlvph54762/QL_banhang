@@ -19,7 +19,7 @@
             <div class="me-3 mt-1"><i class="far fa-bell fs-5 text-muted"></i></div>
             <img src="https://tse4.mm.bing.net/th/id/OIP.ZPuMm81FSMbBbt-Xaa3aQAHaHa?pid=Api&P=0&h=180"
                 style="width: 40px; height: 40px;" class="rounded-circle me-2">
-            <span class="fw-bold">John Doe</span>
+            <span class="fw-bold">{{ Auth::user()->name }}</span>
         </div>
     </div>
 </nav>
