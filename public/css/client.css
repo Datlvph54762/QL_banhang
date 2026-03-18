@@ -54,3 +54,53 @@
         z-index: 1020;
     }
 }
+
+/* chỉnh màu sắc color */
+.color-container {
+    display: flex;
+    gap: 12px;
+}
+
+.color-item {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+/* Hình tròn màu chính */
+.color-circle {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #e0e0e0; /* Viền nhẹ để phân biệt màu trắng với nền */
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Hiệu ứng khi di chuột vào hoặc click chọn */
+.color-item:hover .color-circle {
+    transform: scale(0.8);
+    border-color: #333;
+}
+
+/* Khi input radio được chọn (Active) */
+.color-input:checked + .color-circle {
+    border-color: #000;
+    border-width: 3px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+
+/* Kích thước nút */
+.btn-check:checked + .btn {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #000 !important;
+    font-weight: bold;
+}
+
+.btn-outline-dark:hover {
+    background-color: #f8f9fa;
+    color: #000;
+}

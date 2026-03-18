@@ -9,7 +9,7 @@
                 <p>Trang chủ ></p>
             </a>
             <a href="{{ route('client.products.index') }}" class="text-decoration-none text-dark link-success">
-                <p class="ms-2"> Sản phẩm  > </p>
+                <p class="ms-2"> Sản phẩm > </p>
             </a>
             <a href="" class="text-decoration-none text-success fw-bold">
                 <p class="ms-2"> Show </p>
@@ -34,19 +34,26 @@
                     <div class="attributes">
                         <p class="fw-bold mb-2">Màu sắc:</p>
                         <div class="d-flex gap-2 mb-3">
-                            @foreach($product->variant as $variant)
-                                <button class="btn btn-outline-dark btn-sm shadow-sm link-bold-hover">
-                                    {{ $variant->color->name }}
-                                </button>
+                            @foreach($product->variant->unique('color_id') as $variant)
+                                <label class="color-item" title="{{ $variant->color->name }}">
+                                    <input type="radio" name="color_id" value="{{ $variant->color_id }}"
+                                        class="d-none color-input">
+                                    <span class="color-circle"
+                                        style="background-color: {{ $variant->color->color_code ?? '#eee' }};">
+                                    </span>
+                                </label>
                             @endforeach
                         </div>
 
                         <p class="fw-bold mb-2">Kích thước:</p>
-                        <div class="d-flex gap-2 mb-4">
-                            @foreach($product->variant as $variant)
-                                <button class="btn btn-outline-secondary btn-sm shadow-sm link-bold-hover">
+                        <div class="d-flex gap-2 flex-wrap mb-4">
+                            @foreach($product->variant->unique('size_id') as $variant)
+                                <input type="radio" class="btn-check" name="size_id" id="size-{{ $variant->size_id }}"
+                                    value="{{ $variant->size_id }}" autocomplete="off">
+                                <label class="btn btn-outline-dark btn-sm shadow-sm px-3 py-2"
+                                    for="size-{{ $variant->size_id }}">
                                     {{ $variant->size->name }}
-                                </button>
+                                </label>
                             @endforeach
                         </div>
                     </div>
@@ -93,7 +100,8 @@
                                         <h6 class="text-title mt-3 ">{{ $related->name }}</h6>
                                     </a>
                                 </div>
-                                <span class="text-danger">{{ number_format($related->Variant->min('sale'), 0, ',', '.') }}đ</span>
+                                <span
+                                    class="text-danger">{{ number_format($related->Variant->min('sale'), 0, ',', '.') }}đ</span>
                             </div>
                         </div>
                     @endforeach

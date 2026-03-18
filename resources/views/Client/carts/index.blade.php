@@ -48,7 +48,7 @@
                             <td>
                                 <div class="quantity-input d-flex">
                                     <button type="button" class="btn-decrease px-2 border rounded-start text-danger">-</button>
-                                    <input type="number" class="quantity-input p-1 text-center border text-center" style="width:10%"
+                                    <input type="number" class="quantity-input p-1 border text-center" style="width:10%"
                                         value="{{ $item->quantity }}" min="1">
                                     <button type="button" class="btn-increase px-2 border rounded-end text-danger">+</button>
                                 </div>
