@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ProductVariant;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\account\UserAdminController;
 use App\Http\Controllers\client\AuthClientController;
+use App\Http\Controllers\client\CartClientController;
 use App\Http\Controllers\client\ProductClientController;
 use App\Http\Controllers\HomeClientController;
 use Database\Factories\UserFactory;
@@ -88,3 +89,5 @@ Route::post('/client-logout', [AuthClientController::class, 'logoutClient'])->na
 
 Route::get('/product-list',[ProductClientController::class, 'index'])->name('client.products.index');
 Route::get('/product/{id}',[ProductClientController::class, 'showProduct'])->name('product.show');
+
+Route::get('/cart-list',[CartClientController::class, 'index'])->name('client.carts.index');
