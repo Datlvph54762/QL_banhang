@@ -24,4 +24,8 @@ class CartClientService{
         }
         return ['cart'=>$cart, 'totalAmount'=>$totalAmount];
     }
+
+    public function deleteCartItem($id){
+        return $this->cartRepo->deleteCart($id);
+    }
 }

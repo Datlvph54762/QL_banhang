@@ -91,3 +91,4 @@ Route::get('/product-list',[ProductClientController::class, 'index'])->name('cli
 Route::get('/product/{id}',[ProductClientController::class, 'showProduct'])->name('product.show');
 
 Route::get('/cart-list',[CartClientController::class, 'index'])->name('client.carts.index');
+Route::delete('/delete/{id}',[CartClientController::class, 'detroy'])->name('client.carts.delete');

@@ -21,4 +21,10 @@ class CartClientController extends Controller
 
         return view('client.carts.index', $data);        
     }
+
+    public function detroy($id){
+        $this->cartService->deleteCartItem($id);
+
+        return redirect()->route('client.carts.index')->with('success', 'XÓa thành công');
+    }
 }

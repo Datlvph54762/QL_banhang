@@ -13,6 +13,14 @@
                 <p class="ms-2">Giỏ hàng </p>
             </a>
         </div>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <ul class="mb-0">
+                    <li>{{ session('success') }}</li>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @if($cart && $cart->cartDetail->count() > 0)
             <table class="table">
                 <tr>
@@ -49,10 +57,15 @@
                                 <p class="text-danger">{{ number_format($item->Variant->sale * $item->quantity, 0, ',', '.') }}đ</p>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-outline-warning" title="Xóa"
-                                    onclick="return confirm('Bác có chắc muốn xóa không?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                                <form action="{{ route('client.carts.delete', $item->id) }}" method="POST"
+                                    onsubmit="return confirm('Bạn chắc muốn bỏ sản phẩm này không?')">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-sm btn-outline-warning" title="Xóa">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
