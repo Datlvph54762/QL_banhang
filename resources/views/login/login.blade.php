@@ -15,8 +15,8 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="login px-5 py-4 shadow-lg bg-light">
+    <div class="container vh-100">
+        <div class="login px-5 py-4 shadow-lg bg-light ">
             <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="text_title">
