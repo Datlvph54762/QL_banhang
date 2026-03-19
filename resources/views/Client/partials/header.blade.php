@@ -17,7 +17,7 @@
             @if(Auth::guard('web')->check())
                 <span class="text-white fs-6 fw-bold mt-1">{{ Auth::guard('web')->user()->name }}</span>
             @endif
-            <form action="{{ route('client.logout') }}" method="POST" class="d-inline">
+            <form action="{{ route('client.logout') }}" method="POST" onclick="return confirm('Bạn chắc chắn muốn đắng xuất?')" class="d-inline">
                 @csrf
                 <button type="submit" class="p-0 border-0 bg-transparent text-white">
                     <i class="fas fa-sign-out-alt ps-2"></i>

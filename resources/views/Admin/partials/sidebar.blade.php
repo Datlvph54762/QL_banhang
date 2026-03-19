@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <form action="{{ route('logout') }}" method="POST" class="nav-link ">
+        <form action="{{ route('logout') }}" method="POST" class="nav-link " onclick="return confirm('Bạn chắc chắn muốn đăng xuất khỏi trang quản trị?')">
             @csrf
             <button type="submit" class="text-muted fw-bold mt-auto border-0 button-none">
                 <i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
