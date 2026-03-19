@@ -20,7 +20,7 @@ class AuthClientService
         $user = $this->authRepo->findByEmail($data['email']);
 
         if ($user && Hash::check($data['password'], $user->password)) {
-            Auth::login($user);
+            Auth::guard('web')->login($user);
             return true;
         }
         return false;

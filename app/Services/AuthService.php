@@ -21,7 +21,7 @@ class AuthService
             if ($user->role_id == 3) {
                 return 'not_authorized';
             }
-            Auth::login($user);
+            Auth::guard('admin')->login($user);
             return 'success';
         }
         return 'wrong_credentials';

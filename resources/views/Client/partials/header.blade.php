@@ -14,8 +14,9 @@
     <div class="col-3 text-start fs-5 d-flex">
         <a href="{{ route('client.carts.index') }}"><i class="fa-solid fa-bag-shopping px-3 text-white"></i></a>
         @auth
-            <span class="text-white fs-6 fw-bold mt-1">{{ Auth::user()->name }}</span>
-
+            @if(Auth::guard('web')->check())
+                <span class="text-white fs-6 fw-bold mt-1">{{ Auth::guard('web')->user()->name }}</span>
+            @endif
             <form action="{{ route('client.logout') }}" method="POST" class="d-inline">
                 @csrf
                 <button type="submit" class="p-0 border-0 bg-transparent text-white">

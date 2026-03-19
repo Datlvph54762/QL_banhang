@@ -80,10 +80,7 @@ class AuthClientController extends Controller
     }
 
     public function logoutClient(Request $request){
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        Auth::guard('web')->logout();
 
         return redirect()->route('client.home');
     }
