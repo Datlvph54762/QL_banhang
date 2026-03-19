@@ -16,7 +16,11 @@ class CartClientController extends Controller
     }
 
     public function index(){
-        $userId= Auth::id();
+        if(!auth()->guard('web')->check()){
+            return redirect()->route('client.login')->with('error', 'Bạn không có quyền truy cập nếu chưa đăng nhập');
+        }
+        $userId = auth()->guard('web')->id();
+
         $data= $this->cartService->getCartUser($userId);
 
         return view('client.carts.index', $data);        

@@ -22,6 +22,11 @@
                     <p class="mx-5 fs-4">|</p>
                     <a href="{{ route('client.register') }}" class="text-decoration-none text-dark fs-4">Đăng kí</a>
                 </div>
+                @if(session('error'))
+                    <p style="color: red; font-weight: bold;">
+                        {{ session('error') }}
+                    </p>
+                @endif
                 <div class="form_input">
                     <div class="form-group text-start my-3">
                         <input type="text" name="email" class="input form-control bg-light" value="{{ old('email') }}"
