@@ -19,7 +19,7 @@
         <div class="content">
             <div class="content-title d-flex mx-5 px-4">
                 <div class="image-product col-7">
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="anh" class="w-100 pe-4" height="600">
+                    <img id="main-image" src="{{ asset('storage/' . $product->image) }}" alt="anh" class="w-100 pe-4" height="600">
                 </div>
                 <div class="title-product col-5">
                     <h3>{{ $product->name }}</h3>
@@ -110,3 +110,79 @@
         </div>
     </div>
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 1. Chuyển toàn bộ data biến thể sang JS
+        const variants = @json($product->variant);
+        const storagePath = "{{ asset('storage/') }}/";
+        const defaultImage = "{{ asset('storage/' . $product->image) }}";
+
+        // 2. Lấy các phần tử giao diện
+        const colorInputs = document.querySelectorAll('.color-input');
+        const sizeInputs = document.querySelectorAll('.btn-check');
+        const mainImage = document.getElementById('main-image');
+
+        // Hàm cập nhật Ảnh
+        function updateImage() {
+            const selectedColor = document.querySelector('.color-input:checked');
+            const selectedSize = document.querySelector('.size-input:checked');
+
+            if (selectedColor && selectedSize) {
+                // Tìm đúng cái biến thể có cả Màu và Size đó
+                const variant = variants.find(v => 
+                    v.color_id == selectedColor.value && 
+                    v.size_id == selectedSize.value
+                );
+
+                if (variant && variant.image) {
+                    mainImage.src = storagePath + variant.image;
+                }
+            } else if (selectedColor) {
+                // Nếu chỉ mới chọn màu, lấy ảnh của biến thể đầu tiên có màu đó
+                const firstVariantWithColor = variants.find(v => v.color_id == selectedColor.value && v.image);
+                if (firstVariantWithColor) {
+                    mainImage.src = storagePath + firstVariantWithColor.image;
+                }
+            }
+        }
+
+        // Hàm lọc Size theo Màu
+        function filterSizes() {
+            const selectedColor = document.querySelector('.color-input:checked');
+            if (!selectedColor) return;
+
+            const selectedColorId = selectedColor.value;
+
+            // Lấy danh sách các Size ID mà màu này có
+            const availableSizeIds = variants
+                .filter(v => v.color_id == selectedColorId && v.quantity > 0)
+                .map(v => v.size_id.toString());
+
+            sizeInputs.forEach(input => {
+                const label = document.querySelector(`label[for="${input.id}"]`);
+                if (availableSizeIds.includes(input.value)) {
+                    input.disabled = false;
+                    label.style.display = 'inline-block';
+                    label.style.opacity = '1';
+                } else {
+                    input.disabled = true;
+                    input.checked = false;
+                    label.style.display = 'none'; // Ẩn luôn cho gọn
+                }
+            });
+        }
+
+        // 3. Gắn sự kiện click cho Màu
+        colorInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                filterSizes();
+                updateImage();
+            });
+        });
+
+        // 4. Gắn sự kiện click cho Size
+        sizeInputs.forEach(input => {
+            input.addEventListener('change', updateImage);
+        });
+    });
+</script>
