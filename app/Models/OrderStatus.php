@@ -9,4 +9,8 @@ class OrderStatus extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderStatusFactory> */
     use HasFactory;
+
+    public function orders(){
+        return $this->hasMany(Order::class, 'status_id');
+    }
 }

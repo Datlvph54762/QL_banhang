@@ -9,4 +9,12 @@ class OrderDetail extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderDetailFactory> */
     use HasFactory;
+
+    public function Order(){
+        return $this->belongsTo(Order::class,'order_id');
+    }
+
+    public function variants(){
+        return $this->belongsTo(ProductVariant::class,'product_variant_id');
+    }
 }

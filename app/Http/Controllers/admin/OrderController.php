@@ -19,4 +19,10 @@ class OrderController extends Controller
 
         return view('admin.orders.index', compact('orders'));
     }
+
+    public function show($id){
+        $order = $this->orderService->getOrderDetail($id);
+
+        return view('admin.orders.show', compact('order'));
+    }
 }
