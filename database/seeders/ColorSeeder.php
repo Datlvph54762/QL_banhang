@@ -14,11 +14,16 @@ class ColorSeeder extends Seeder
     public function run(): void
     {
         Color::insert([
-            ['name' => 'Đen'],
-            ['name' => 'Trắng'],
-            ['name' => 'Đỏ'],
-            ['name' => 'Xanh'],
-            ['name' => 'Vàng'],
+            ['name' => 'Đen', 'color_code' => '#000000'],
+            ['name' => 'Trắng', 'color_code' => '#FFFFFF'],
+            ['name' => 'Đỏ', 'color_code' => '#FF0000'],
+            ['name' => 'Xanh', 'color_code' => '#0000FF'],
+            ['name' => 'Vàng', 'color_code' => '#FFFF00'],
+            ['name' => 'Xanh Navy', 'color_code' => '#000080'],
+            ['name' => 'Xám', 'color_code' => '#808080'],
+            ['name' => 'Xanh lá', 'color_code' => '#008000'],
+            ['name' => 'Nâu', 'color_code' => '#A52A2A'],
+            ['name' => 'Be (Beige)', 'color_code' => '#F5F5DC'],
         ]);
     }
 }
