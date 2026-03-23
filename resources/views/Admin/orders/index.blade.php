@@ -37,11 +37,11 @@
                                 <td>
                                     {{ $order->address}}
                                 </td>
-                                <td>{{ $order->subtotal }}</td>
-                                <td>{{ $order->discount }}</td>
-                                <td>{{ $order->total_amount }}</td>
+                                <td>{{ number_format($order->subtotal, 0, ',', '.') }}</td>
+                                <td>{{ number_format($order->discount, 0, ',', '.') }}</td>
+                                <td>{{ number_format($order->total_amount, 0, ',', '.') }}</td>
                                 <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-outline-warning" title="Show">
+                                    <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-sm btn-outline-warning" title="Show">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                 </td>
