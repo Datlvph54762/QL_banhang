@@ -26,7 +26,6 @@ class OrderDetailFactory extends Factory
             'product_variant_id' => ProductVariant::inRandomOrder()->value('id'),
             'price' => $price,
             'quantity' => $quantity,
-            'status' => fake()->randomElement(['pending', 'shipping', 'completed']),
             'note' => fake()->boolean(30) ? fake()->sentence() : null,
         ];
     }

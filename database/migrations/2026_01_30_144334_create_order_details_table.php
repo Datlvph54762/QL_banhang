@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->foreignId('product_variant_id')->constrained()->cascadeOnDelete();
             $table->decimal('price', 12, 2);
             $table->integer('quantity');
-            $table->string('status')->default('pending');
             $table->text('note')->nullable();
             $table->timestamps();
         });

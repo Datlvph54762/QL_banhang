@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             // ProductVariantSeeder::class,
             // CartSeeder::class,
             // CartDetailSeeder::class,
+            // OrderStatusSeeder::class,
             // OrderSeeder::class,
             // OrderDetailSeeder::class,
         ]);

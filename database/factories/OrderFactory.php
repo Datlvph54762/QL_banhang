@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\OrderStatus;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,6 +25,7 @@ class OrderFactory extends Factory
 
         return [
             'user_id' => User::inRandomOrder()->value('id'),
+            'status_id' => OrderStatus::inRandomOrder()->value('id'),
             'order_code' => fake()->unique()->bothify('ORD###'),
             'name' => fake()->name(),
             'phone' => fake()->phoneNumber(),
