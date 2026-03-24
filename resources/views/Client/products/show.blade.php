@@ -38,9 +38,7 @@
                                 <label class="color-item" title="{{ $variant->color->name }}">
                                     <input type="radio" name="color_id" value="{{ $variant->color_id }}"
                                         class="d-none color-input">
-                                    <span class="color-circle"
-                                        style="background-color: {{ $variant->color->color_code ?? '#eee' }};">
-                                    </span>
+                                    <span class="color-circle" style="--bg-color: {{ $variant->color->color_code ?? '#eee' }}; background-color: var(--bg-color);"></span>
                                 </label>
                             @endforeach
                         </div>
@@ -58,15 +56,19 @@
                         </div>
                     </div>
 
-                    <div class="quantity-selector ">
-                        <p class="fw-bold">Số lượng:</p>
-                        <div class="quantity-input d-flex">
-                            <button type="button" class="btn-decrease px-3 border rounded-start text-danger">-</button>
-                            <input type="number" class="quantity-input p-2 border text-center" style="width:20%" value="1"
-                                min="1">
-                            <button type="button" class="btn-increase px-3 border rounded-end text-danger">+</button>
-                        </div>
+                    <p class="fw-bold">Số lượng:
+                        <span id="stock-display" class="text-secondary fw-normal ms-2" style="font-size: 0.9rem;">
+                            (Vui lòng chọn màu và kích thước)
+                        </span>
+                    </p>
+
+                    <div class="quantity-input d-flex">
+                        <button type="button" id="btn-decrease" class="px-3 border rounded-start text-danger">-</button>
+                        <input type="number" id="buy-quantity" class="p-2 border text-center" style="width:20%" value="1" min="1" readonly>
+                        <button type="button" id="btn-increase" class="px-3 border rounded-end text-danger">+</button>
                     </div>
+
+                    <small id="quantity-error" class="text-danger d-block mt-1"></small>
 
                     <div class="button-sub pt-4">
                         <div class="btn-mua ">
@@ -112,77 +114,106 @@
 @endsection
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // 1. Chuyển toàn bộ data biến thể sang JS
-        const variants = @json($product->variant);
+        const variants = JSON.parse('{!! json_encode($product->variant) !!}');
         const storagePath = "{{ asset('storage/') }}/";
-        const defaultImage = "{{ asset('storage/' . $product->image) }}";
-
-        // 2. Lấy các phần tử giao diện
+        
         const colorInputs = document.querySelectorAll('.color-input');
         const sizeInputs = document.querySelectorAll('.btn-check');
         const mainImage = document.getElementById('main-image');
 
-        // Hàm cập nhật Ảnh
-        function updateImage() {
-            const selectedColor = document.querySelector('.color-input:checked');
-            const selectedSize = document.querySelector('.size-input:checked');
+        const stockDisplay = document.getElementById('stock-display');
+        const buyQuantityInput = document.getElementById('buy-quantity');
+        const btnDecrease = document.getElementById('btn-decrease');
+        const btnIncrease = document.getElementById('btn-increase');
 
+        const quantityError = document.getElementById('quantity-error');
+
+        let currentMaxStock = 0;
+
+        function updateVariantInfo() {
+            const selectedColor = document.querySelector('.color-input:checked');
+            let selectedSize = document.querySelector('.btn-check:checked');
+
+            // --- LOGIC LỌC SIZE (KHÔNG CẦN SỬA HTML) ---
+            if (selectedColor) {
+                const selectedColorId = selectedColor.value;
+
+                // Tìm các Size ID hợp lệ cho Màu này
+                const availableSizeIds = variants
+                    .filter(v => v.color_id == selectedColorId && v.quantity > 0)
+                    .map(v => v.size_id.toString());
+
+                sizeInputs.forEach(input => {
+                    // Tui dùng nextElementSibling vì trong HTML của ông 
+                    // thẻ <label> nằm ngay sau thẻ <input> của Size
+                    const label = input.nextElementSibling;
+
+                    if (availableSizeIds.includes(input.value)) {
+                        input.disabled = false;
+                        if (label) {
+                            label.style.display = "inline-block";
+                            label.style.opacity = "1";
+                        }
+                    } else {
+                        input.disabled = true;
+                        if (input.checked) input.checked = false;
+                        if (label) {
+                            label.style.display = "none"; // Ẩn đi cho chuyên nghiệp
+                        }
+                    }
+                });
+            }
+
+            // Cập nhật lại biến selectedSize sau khi lọc
+            selectedSize = document.querySelector('.btn-check:checked');
+            buyQuantityInput.value = 1;
+            quantityError.innerText = "";
+
+            // --- LOGIC HIỂN THỊ ẢNH & KHO ---
             if (selectedColor && selectedSize) {
-                // Tìm đúng cái biến thể có cả Màu và Size đó
-                const variant = variants.find(v => 
-                    v.color_id == selectedColor.value && 
-                    v.size_id == selectedSize.value
+                const variant = variants.find(v =>
+                    v.color_id == selectedColor.value && v.size_id == selectedSize.value
                 );
 
-                if (variant && variant.image) {
-                    mainImage.src = storagePath + variant.image;
+                if (variant) {
+                    currentMaxStock = variant.quantity;
+                    stockDisplay.innerText = `(Còn ${currentMaxStock} sản phẩm)`;
+                    stockDisplay.style.color = "green";
+                    if (variant.image) mainImage.src = storagePath + variant.image;
                 }
             } else if (selectedColor) {
-                // Nếu chỉ mới chọn màu, lấy ảnh của biến thể đầu tiên có màu đó
-                const firstVariantWithColor = variants.find(v => v.color_id == selectedColor.value && v.image);
-                if (firstVariantWithColor) {
-                    mainImage.src = storagePath + firstVariantWithColor.image;
-                }
+                const colorVariants = variants.filter(v => v.color_id == selectedColor.value);
+                const totalStock = colorVariants.reduce((sum, v) => sum + v.quantity, 0);
+                currentMaxStock = totalStock;
+
+                stockDisplay.innerText = `(Vui lòng chọn size - Tổng kho: ${totalStock})`;
+                stockDisplay.style.color = "gray";
+
+                const firstImg = colorVariants.find(v => v.image);
+                if (firstImg) mainImage.src = storagePath + firstImg.image;
             }
         }
 
-        // Hàm lọc Size theo Màu
-        function filterSizes() {
-            const selectedColor = document.querySelector('.color-input:checked');
-            if (!selectedColor) return;
-
-            const selectedColorId = selectedColor.value;
-
-            // Lấy danh sách các Size ID mà màu này có
-            const availableSizeIds = variants
-                .filter(v => v.color_id == selectedColorId && v.quantity > 0)
-                .map(v => v.size_id.toString());
-
-            sizeInputs.forEach(input => {
-                const label = document.querySelector(`label[for="${input.id}"]`);
-                if (availableSizeIds.includes(input.value)) {
-                    input.disabled = false;
-                    label.style.display = 'inline-block';
-                    label.style.opacity = '1';
-                } else {
-                    input.disabled = true;
-                    input.checked = false;
-                    label.style.display = 'none'; // Ẩn luôn cho gọn
-                }
-            });
-        }
-
-        // 3. Gắn sự kiện click cho Màu
-        colorInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                filterSizes();
-                updateImage();
-            });
+        // Logic Tăng (+) và Giảm (-) giữ nguyên
+        btnIncrease.addEventListener('click', function () {
+            if (!document.querySelector('.color-input:checked') || !document.querySelector('.btn-check:checked')) {
+                quantityError.innerText = "Vui lòng chọn Màu và Size!";
+                return;
+            }
+            let currentQty = parseInt(buyQuantityInput.value);
+            if (currentQty < currentMaxStock) {
+                buyQuantityInput.value = currentQty + 1;
+            } else {
+                quantityError.innerText = "Hết kho rồi ông giáo ạ!";
+            }
         });
 
-        // 4. Gắn sự kiện click cho Size
-        sizeInputs.forEach(input => {
-            input.addEventListener('change', updateImage);
+        btnDecrease.addEventListener('click', function () {
+            let currentQty = parseInt(buyQuantityInput.value);
+            if (currentQty > 1) buyQuantityInput.value = currentQty - 1;
         });
+
+        colorInputs.forEach(input => input.addEventListener('change', updateVariantInfo));
+        sizeInputs.forEach(input => input.addEventListener('change', updateVariantInfo));
     });
 </script>
