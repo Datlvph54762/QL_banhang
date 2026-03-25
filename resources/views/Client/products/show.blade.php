@@ -22,65 +22,83 @@
                     <img id="main-image" src="{{ asset('storage/' . $product->image) }}" alt="anh" class="w-100 pe-4" height="600">
                 </div>
                 <div class="title-product col-5">
-                    <h3>{{ $product->name }}</h3>
-                    <p class="text-secondary">Mã sản phẩm: {{ $product->product_code }}</p>
-                    <div class="price-sale d-flex">
-                        <h2 class="text-danger">{{ number_format($product->Variant->min('sale')) }}đ</h2>
-                        @if($product->Variant->first()->price)
-                            <del class="ms-3 fs-5">{{ number_format($product->Variant->max('price')) }}đ</del>
-                        @endif
-                    </div>
+                    @if(session('success'))
+                        <div class="alert alert-success mt-2">{{ session('success') }}</div>
+                    @endif
 
-                    <div class="attributes">
-                        <p class="fw-bold mb-2">Màu sắc:</p>
-                        <div class="d-flex gap-2 mb-3">
-                            @foreach($product->variant->unique('color_id') as $variant)
-                                <label class="color-item" title="{{ $variant->color->name }}">
-                                    <input type="radio" name="color_id" value="{{ $variant->color_id }}"
-                                        class="d-none color-input">
-                                    <span class="color-circle" style="--bg-color: {{ $variant->color->color_code ?? '#eee' }}; background-color: var(--bg-color);"></span>
-                                </label>
-                            @endforeach
+                    @if(session('error'))
+                        <div class="alert alert-danger mt-2">{{ session('error') }}</div>
+                    @endif
+                    <form action="{{ route('client.cart.add') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                        <h3>{{ $product->name }}</h3>
+                        <p class="text-secondary">Mã sản phẩm: {{ $product->product_code }}</p>
+                        <div class="price-sale d-flex">
+                            <h2 class="text-danger">{{ number_format($product->Variant->min('sale')) }}đ</h2>
+                            @if($product->Variant->first()->price)
+                                <del class="ms-3 fs-5">{{ number_format($product->Variant->max('price')) }}đ</del>
+                            @endif
                         </div>
 
-                        <p class="fw-bold mb-2">Kích thước:</p>
-                        <div class="d-flex gap-2 flex-wrap mb-4">
-                            @foreach($product->variant->unique('size_id') as $variant)
-                                <input type="radio" class="btn-check" name="size_id" id="size-{{ $variant->size_id }}"
-                                    value="{{ $variant->size_id }}" autocomplete="off">
-                                <label class="btn btn-outline-dark btn-sm shadow-sm px-3 py-2"
-                                    for="size-{{ $variant->size_id }}">
-                                    {{ $variant->size->name }}
-                                </label>
-                            @endforeach
+                        <div class="attributes">
+                            <p class="fw-bold mb-2">Màu sắc:</p>
+                            <div class="d-flex gap-2 mb-3">
+                                @foreach($product->variant->unique('color_id') as $variant)
+                                    <label class="color-item" title="{{ $variant->color->name }}">
+                                        <input type="radio" name="color_id" value="{{ $variant->color_id }}"
+                                            class="d-none color-input"  >
+                                        <span class="color-circle"
+                                            style="--bg-color: {{ $variant->color->color_code ?? '#eee' }}; background-color: var(--bg-color);"></span>
+                                    </label>
+                                @endforeach
+                                @error('color_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <p class="fw-bold mb-2">Kích thước:</p>
+                            <div class="d-flex gap-2 flex-wrap mb-4">
+                                @foreach($product->variant->unique('size_id') as $variant)
+                                    <input type="radio" class="btn-check" name="size_id" id="size-{{ $variant->size_id }}"
+                                        value="{{ $variant->size_id }}" autocomplete="off" >
+                                    <label class="btn btn-outline-dark btn-sm shadow-sm px-3 py-2"
+                                        for="size-{{ $variant->size_id }}">
+                                        {{ $variant->size->name }}
+                                    </label>
+                                @endforeach
+                                @error('size_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
-                    <p class="fw-bold">Số lượng:
-                        <span id="stock-display" class="text-secondary fw-normal ms-2" style="font-size: 0.9rem;">
-                            (Vui lòng chọn màu và kích thước)
-                        </span>
-                    </p>
+                        <p class="fw-bold">Số lượng:
+                            <span id="stock-display" class="text-secondary fw-normal ms-2" style="font-size: 0.9rem;">
+                                (Vui lòng chọn màu và kích thước)
+                            </span>
+                        </p>
 
-                    <div class="quantity-input d-flex">
-                        <button type="button" id="btn-decrease" class="px-3 border rounded-start text-danger">-</button>
-                        <input type="number" id="buy-quantity" class="p-2 border text-center" style="width:20%" value="1" min="1" readonly>
-                        <button type="button" id="btn-increase" class="px-3 border rounded-end text-danger">+</button>
-                    </div>
-
-                    <small id="quantity-error" class="text-danger d-block mt-1"></small>
-
-                    <div class="button-sub pt-4">
-                        <div class="btn-mua ">
-                            <button type="button" class="btn btn-lg w-100 text-white fw-bold">Mua ngay</button>
+                        <div class="quantity-input d-flex">
+                            <button type="button" id="btn-decrease" class="px-3 border rounded-start text-danger">-</button>
+                            <input type="number" name="quantity" id="buy-quantity" class="p-2 border text-center" style="width:20%"
+                                value="1" min="1" readonly>
+                            <button type="button" id="btn-increase" class="px-3 border rounded-end text-danger">+</button>
                         </div>
-                        <div class="btn-card mt-3">
-                            <button type="button" class="btn btn-lg w-100 border  fw-bold">Thêm vào giỏ hàng</button>
+
+                        <small id="quantity-error" class="text-danger d-block mt-1"></small>
+
+                        <div class="button-sub pt-4">
+                            <div class="btn-mua ">
+                                <button type="button" class="btn btn-lg w-100 text-white fw-bold">Mua ngay</button>
+                            </div>
+                            <div class="btn-card mt-3">
+                                <button type="submit" class="btn btn-lg w-100 border  fw-bold">Thêm vào giỏ hàng</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-
-
             </div>
         </div>
 

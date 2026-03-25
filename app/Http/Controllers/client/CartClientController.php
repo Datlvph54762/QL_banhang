@@ -31,4 +31,29 @@ class CartClientController extends Controller
 
         return redirect()->route('client.carts.index')->with('success', 'XÓa thành công');
     }
+
+    public function addToCart(Request $request){
+        if(!Auth::check()){
+            return redirect()->route('client.login')->with('error','Bạn cần đăng nhập để thực hiện hành động thêm sản phẩm vào giỏ hàng!!!');
+        }
+
+        $data=$request->validate([
+            'product_id'=> 'required|exists:products,id',
+            'color_id'=> 'required',
+            'size_id'=> 'required',
+            'quantity'=> 'required|integer|min:1',
+        ],
+        [
+            'product_id.exists'=>'Sản phẩm không hợp lệ',
+            'color_id.required'=>'Vui lòng chọn màu',
+            'size_id.required'=>'Vui lòng chọn size',
+        ]);
+        $result= $this->cartService->addVariantToCart($data);
+
+        if(!$result['success']){
+            return back()->with('error',$result['message'])->withInput();
+        }
+
+        return back()->with('success', $result['message']);
+    }
 }
