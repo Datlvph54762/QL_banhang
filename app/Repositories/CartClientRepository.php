@@ -45,4 +45,13 @@ class CartClientRepository{
             ]
         );
     }
+
+    public function getCartForCheckout($userId){
+        return Cart::with(
+            'cartDetail.variant.product', 
+            'cartDetail.variant.color', 
+            'cartDetail.variant.size'
+            )->where('user_id', $userId)
+            ->first();
+    } 
 }

@@ -13,6 +13,12 @@
                 <p class="ms-2">Giỏ hàng </p>
             </a>
         </div>
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <ul class="mb-0">
@@ -78,7 +84,12 @@
                         <p class="fw-bold text-danger">{{ number_format($totalAmount, 0, ',', '.') }}đ</p>
                     </div>
                     <div class="button">
-                        <button class="btn-mua btn btn-success text-white fw-bold w-100">Thanh toán</button>
+                        <form action="{{ route('client.cart.checkout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn-mua btn btn-success text-white fw-bold w-100">
+                                Thanh toán
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

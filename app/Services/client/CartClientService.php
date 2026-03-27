@@ -70,4 +70,30 @@ class CartClientService{
             'message'=>'Thêm sản phẩm vào giỏ hàng thành công'
         ];
     }
+
+    public function checkData($userId){
+        $cart= $this->cartRepo->getCartForCheckout($userId);
+
+        if(!$cart || $cart->cartDetail->isEmpty()){
+            throw new \Exception('Giỏ hàng trống , không thể thanh toán');
+        }
+
+        $totalAmount= 0;
+
+        foreach($cart->cartDetail as $item){
+            $variant= $item->variant;
+
+            if (!$variant || $item->quantity > $variant->quantity) {
+                throw new \Exception("Sản phẩm {$variant->product->name} hiện không đủ hàng.");
+            }
+
+            $totalAmount += $variant->sale * $item->quantity;
+        }
+
+        return [
+            'cart'=>$cart,
+            'totalAmount'=>$totalAmount,
+            'shippingFee'=>30000
+        ];
+    }
 }
