@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\account\UserAdminController;
 use App\Http\Controllers\client\AuthClientController;
 use App\Http\Controllers\client\CartClientController;
+use App\Http\Controllers\client\CheckoutClientController;
 use App\Http\Controllers\client\ProductClientController;
 use App\Http\Controllers\HomeClientController;
 use Database\Factories\UserFactory;
@@ -96,3 +97,6 @@ Route::get('/product/{id}',[ProductClientController::class, 'showProduct'])->nam
 Route::get('/cart-list',[CartClientController::class, 'index'])->name('client.carts.index');
 Route::delete('/delete/{id}',[CartClientController::class, 'detroy'])->name('client.carts.delete');
 Route::post('/cart-add', [CartClientController::class, 'addToCart'])->name('client.cart.add');
+Route::post('/checkout', [CartClientController::class, 'checkout'])->name('client.cart.checkout');
+
+Route::get('/checkout-list', [CheckoutClientController::class,'index' ])->name('client.checkout.index');
