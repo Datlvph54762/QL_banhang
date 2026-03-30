@@ -46,19 +46,19 @@
                     <h4 class="border-bottom pb-2 fw-bold">Tóm tắt đơn hàng</h4>
                     <div class="total d-flex justify-content-between">
                         <p>Số lượng sản phẩm</p>
-                        <p id="total_quantity">3</p>
+                        <p id="total_quantity">{{ $cart->cartDetail->sum('quantity')}}</p>
                     </div>
                     <div class="total d-flex justify-content-between">
                         <p>Tổng tiền hàng</p>
-                        <p id="total_amount" class="text-danger"> 520.000 đ</p>
+                        <p id="total_amount" class="text-danger"> {{ number_format($totalAmount) }} VNĐ</p>
                     </div>
                     <div class="total d-flex justify-content-between">
                         <p>Phí vận chuyển</p>
-                        <p>30.000 đ</p>
+                        <p>{{ number_format($shippingFee) }} VNĐ</p>
                     </div>
                     <div class="total d-flex justify-content-between">
                         <p class="fw-bold">Tổng thanh toán</p>
-                        <p><b id="final_amount" class="text-danger fw-bold">550.000 đ</b></p>
+                        <p><b id="final_amount" class="text-danger fw-bold">{{ number_format($totalAmount + $shippingFee) }} VNĐ</b></p>
                     </div>
 
                     <div class="button mt-2 text-end">
@@ -85,20 +85,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="image-product d-flex">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTrI-pGHM28O601EwtBOv7LRTj07iGnxVBGw&s" alt="ảnh" width="100" height="100">
-                                        <div class="product ms-2">
-                                            <p>Sản phẩm</p>
-                                            <p>Color:...., Size: ....</p>
+                            @foreach ($cart->cartDetail as $item)
+                                <tr>
+                                    <td>
+                                        <div class="image-product d-flex">
+                                            <img src="{{ asset('storage/'. $item->variant->image) }}"
+                                                alt="ảnh" width="100" height="100">
+                                            <div class="product ms-2">
+                                                <p>{{ $item->variant->product->name }}</p>
+                                                <p>Phân loại: {{ $item->variant->color->name }} -
+                                                    {{ $item->variant->size->name }}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>300.000đ</td>
-                                <td>6</td>
-                                <td>1.800.000 đ</td>
-                            </tr>
+                                    </td>
+                                    <td>{{ number_format($item->variant->sale) }} VNĐ</td>
+                                    <td>{{ $item->quantity }}</td>
+                                    <td>{{ number_format($item->variant->sale * $item->quantity) }} VNĐ</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
