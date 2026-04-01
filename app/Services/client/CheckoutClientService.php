@@ -55,4 +55,8 @@ class CheckoutClientService
             return $order;
         });
     }
+
+    public function getOrderUser($id){
+        return $this->checkoutRepo->getUserOrder($id);
+    }
 }

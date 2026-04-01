@@ -100,3 +100,4 @@ Route::post('/cart-add', [CartClientController::class, 'addToCart'])->name('clie
 
 Route::get('/checkout-form', [CheckoutClientController::class,'index' ])->name('client.checkout.index');
 Route::post('/checkout', [CheckoutClientController::class,'store' ])->name('client.checkout.store');
+Route::get('/success/{id}', [CheckoutClientController::class,'success' ])->name('client.checkout.success');

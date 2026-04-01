@@ -21,4 +21,8 @@ class CheckoutRepository{
 
         return OrderDetail::create($data);
     }
+
+    public function getUserOrder($id){
+        return Order::findOrFail($id);
+    }
 }

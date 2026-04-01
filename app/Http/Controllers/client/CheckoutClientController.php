@@ -59,10 +59,15 @@ class CheckoutClientController extends Controller
 
             $order = $this->checkoutService->checkout($request->all(), $checkoutData);
 
-            return redirect()->route('', $order->id)->with('success', 'Hoàn tất đơn hàng');
+            return redirect()->route('client.checkout.success', $order->id)->with('success', 'Hoàn tất đơn hàng');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage())->withInput();
-        }
-        ;
+        };
+    }
+
+    public function success($id){
+        $order= $this->checkoutService->getOrderUser($id);
+
+        return view('client.checkout.success', compact('order'));
     }
 }
