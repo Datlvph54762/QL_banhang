@@ -97,6 +97,6 @@ Route::get('/product/{id}',[ProductClientController::class, 'showProduct'])->nam
 Route::get('/cart-list',[CartClientController::class, 'index'])->name('client.carts.index');
 Route::delete('/delete/{id}',[CartClientController::class, 'detroy'])->name('client.carts.delete');
 Route::post('/cart-add', [CartClientController::class, 'addToCart'])->name('client.cart.add');
-Route::post('/checkout', [CartClientController::class, 'checkout'])->name('client.cart.checkout');
 
-Route::get('/checkout-list', [CheckoutClientController::class,'index' ])->name('client.checkout.index');
+Route::get('/checkout-form', [CheckoutClientController::class,'index' ])->name('client.checkout.index');
+Route::post('/checkout', [CheckoutClientController::class,'store' ])->name('client.checkout.store');
