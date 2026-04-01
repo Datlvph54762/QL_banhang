@@ -84,12 +84,9 @@
                         <p class="fw-bold text-danger">{{ number_format($totalAmount, 0, ',', '.') }}đ</p>
                     </div>
                     <div class="button">
-                        <form action="{{ route('client.cart.checkout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn-mua btn btn-success text-white fw-bold w-100">
-                                Thanh toán
-                            </button>
-                        </form>
+                        <a href="{{ route('client.checkout.index') }}" class="btn btn-success text-white fw-bold w-100">
+                            Thanh toán
+                        </a>
                     </div>
                 </div>
             </div>

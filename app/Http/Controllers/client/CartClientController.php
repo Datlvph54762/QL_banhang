@@ -57,19 +57,4 @@ class CartClientController extends Controller
         return back()->with('success', $result['message']);
     }
 
-    public function checkout(){
-        if(!Auth::check()){
-            return redirect()->route('client.login')->with('error','Bạn cần đăng nhập để thực hiện hành động thêm sản phẩm vào giỏ hàng!!!');
-        }
-
-        try{
-            $userId= Auth::id();
-
-            $data= $this->cartService->checkData($userId);
-
-            return view('client.checkout.index', $data);
-        }catch(\Exception $e){
-            return redirect()->route('client.carts.index')->with('error', $e->getMessage());
-        }
-    }
 }
