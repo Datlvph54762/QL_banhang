@@ -35,4 +35,15 @@ class ProductVariantRepository
 
         return $productVariant->update($data);
     }
+
+    //Hàm trừ sl khi KH mua hàng
+    public function decrementStock($variantId, $quantity){
+        $variant= ProductVariant::find($variantId);
+
+        if($variant && $variant->quantity >= $quantity){
+            return $variant->decrement('quantity', $quantity);
+        }
+
+        return false;
+    }
 }
