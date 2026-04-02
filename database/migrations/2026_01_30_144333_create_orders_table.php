@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('status_id')->default(1)->constrained('order_statuses');
+            $table->foreignId('payment_status_id')->default(1)->constrained('payment_statuses');
             $table->string('payment_method')->default('COD');
-            $table->string('payment_status')->default('Chưa thanh toán');
             $table->string('order_code')->unique();
             $table->string('name');
             $table->string('phone');
