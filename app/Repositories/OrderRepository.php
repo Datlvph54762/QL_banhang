@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 use App\Models\Order;
+use App\Models\OrderStatus;
+use App\Models\PaymentStatus;
 
 class OrderRepository
 {
@@ -15,10 +17,21 @@ class OrderRepository
         return Order::with(
             'user',
             'status',
+            'paymentStatus',
             'orderDetails',
             'orderDetails.variants.product',
             'orderDetails.variants.color',
             'orderDetails.variants.size',
         )->findOrFail($id);
+    }
+
+    //Lấy danh sách trạng thái đơn hàng
+    public function getAllStatus(){
+        return OrderStatus::all();
+    }
+
+    //Lấy danh sách trạng thái thanh toán
+    public function getAllPaymentStatus(){
+        return PaymentStatus::all();
     }
 }

@@ -7,7 +7,7 @@
         <div class="card shadow-sm border-0">
             <div class="card-header bg-white py-3 d-flex justify-content-between">
                 <h5 class="mb-0 fw-bold text-dark">Chi tiết đơn hàng: #{{ $order->order_code }}</h5>
-                <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-secondary">
+                <a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-secondary">
                     <i class="fas fa-arrow-left"></i> Quay lại
                 </a>
             </div>
@@ -21,19 +21,42 @@
                         <p class="mb-1"><strong>Số điện thoại:</strong> {{ $order->phone }}</p>
                         <p class="mb-1"><strong>Địa chỉ:</strong> {{ $order->address }}</p>
                         <p class="mb-0"><strong>Ghi chú:</strong> <span
-                                class="text-muted">{{ $order->note ?? 'Không có' }}</span></p>
+                                class="text-muted">{{ $order->note ?? '...' }}</span></p>
                     </div>
 
-                    <div class="col-md-6 ps-md-4">
+                    <div class="col-md-4 ps-md-4">
                         <h6 class="text-uppercase fw-bold text-secondary mb-3" style="font-size: 0.8rem;">Thông tin đơn hàng
                         </h6>
-                        <p class="mb-1"><strong>Ngày đặt:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
-                        <p class="mb-1"><strong>Trạng thái:</strong> <span class="badge bg-success">{{ $order->status->name }}</span>
+                        <p class="mb-2"><strong>Ngày đặt:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
+                        <div class="mb-3 d-flex align-items-center">
+                            <strong class="me-2">Trạng thái đơn hàng:</strong>
+                            <select name="status_id" id="status_id" class="form-select form-select-sm shadow-sm"
+                                style="width: 180px; border-color: #dee2e6;">
+                                @foreach ($statuses as $status)
+                                    <option value="{{ $status->id }}" {{ $order->status_id == $status->id ? 'selected' : '' }}>
+                                        {{ $status->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <p class="mb-2 d-flex align-items-center"><strong class="me-2">Trạng thái thanh toán:</strong>
+                            <select name="payment_status_id" id="payment_status_id"
+                                class="form-select form-select-sm shadow-sm" style="width: 180px; border-color: #dee2e6;">
+                                @foreach ($paymentStatuses as $paymentStatus)
+                                    <option value="{{ $paymentStatus->id }}" {{ old('payment_status_id', $order->payment_status_id == $paymentStatus->id ? 'selected' : '') }}>
+                                        {{ $paymentStatus->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </p>
-                        <p class="mb-1"><strong>Thanh toán:</strong> </p>
                         <p class="mb-0"><strong>Tổng tiền:</strong> <span
                                 class="text-danger fw-bold fs-5">{{ number_format($order->total_amount) }}đ</span></p>
                     </div>
+                    <div class="col-md-2 text-end">
+                        <button type="" class="btn btn-primary">Cập nhật</button>
+                    </div>
+
                 </div>
 
                 <h6 class="text-uppercase fw-bold text-secondary mb-3" style="font-size: 0.8rem;">Sản phẩm đã đặt</h6>

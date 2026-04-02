@@ -22,7 +22,9 @@ class OrderController extends Controller
 
     public function show($id){
         $order = $this->orderService->getOrderDetail($id);
+        $statuses= $this->orderService->getAllStatus();
+        $paymentStatuses= $this->orderService->getAllPaymentStatus();
 
-        return view('admin.orders.show', compact('order'));
+        return view('admin.orders.show', compact('order','statuses','paymentStatuses'));
     }
 }

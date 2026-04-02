@@ -21,4 +21,14 @@ class OrderService
     {
         return $this->orderrepo->findOrder($id);
     }
+
+    //Lấy danh sách trạng thái đơn hàng
+    public function getAllStatus(){
+        return $this->orderrepo->getAllStatus();
+    }
+
+    //Lấy danh sách trạng thái Thanh toán
+    public function getAllPaymentStatus(){
+        return $this->orderrepo->getAllPaymentStatus();
+    }
 }
