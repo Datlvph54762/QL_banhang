@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\PaymentStatus;
+use Illuminate\Support\Facades\Auth;
 
 class OrderRepository
 {
@@ -39,5 +40,14 @@ class OrderRepository
         $order= Order::findOrFail($id);
 
         return $order->update($data);
+    }
+
+    public function getAllOrderUser(){
+        return Order::with([
+            'status', 
+            'orderDetails.variants.product', 
+            'orderDetails.variants.color',   
+            'orderDetails.variants.size'])
+            ->where('user_id', Auth::id())->latest()->get();
     }
 }
