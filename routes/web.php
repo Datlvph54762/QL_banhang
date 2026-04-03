@@ -57,6 +57,7 @@ Route::prefix('admin')->group(function () {
     // Quản lý Đơn hàng (Orders)
     Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
+    Route::put('/edit-status/{id}/', [OrderController::class, 'update'])->name('admin.orders.update');
 
     // Quản lý Tài khoản & Phân quyền (Accounts)
     Route::prefix('accounts')->group(function () {
