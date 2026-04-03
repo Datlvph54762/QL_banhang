@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductVariant;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\account\UserAdminController;
+use App\Http\Controllers\client\AccountClientController;
 use App\Http\Controllers\client\AuthClientController;
 use App\Http\Controllers\client\CartClientController;
 use App\Http\Controllers\client\CheckoutClientController;
@@ -102,3 +103,5 @@ Route::post('/cart-add', [CartClientController::class, 'addToCart'])->name('clie
 Route::get('/checkout-form', [CheckoutClientController::class,'index' ])->name('client.checkout.index');
 Route::post('/checkout', [CheckoutClientController::class,'store' ])->name('client.checkout.store');
 Route::get('/success/{id}', [CheckoutClientController::class,'success' ])->name('client.checkout.success');
+
+Route::get('/account/orders',[AccountClientController::class, 'index'])->name('client.accounts.orders.index');
