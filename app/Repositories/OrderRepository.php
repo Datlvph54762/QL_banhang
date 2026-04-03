@@ -34,4 +34,10 @@ class OrderRepository
     public function getAllPaymentStatus(){
         return PaymentStatus::all();
     }
+
+    public function findUpdateStatus($id, $data){
+        $order= Order::findOrFail($id);
+
+        return $order->update($data);
+    }
 }

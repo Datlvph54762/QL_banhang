@@ -27,4 +27,13 @@ class OrderController extends Controller
 
         return view('admin.orders.show', compact('order','statuses','paymentStatuses'));
     }
+
+    public function update(Request $request,$id ){
+
+        $data= $request->only(['status_id','payment_status_id']);
+
+        $this->orderService->updateStatus($id, $data);
+
+        return back()->with('success','Cập nhật trạng thái thành công');
+    }
 }

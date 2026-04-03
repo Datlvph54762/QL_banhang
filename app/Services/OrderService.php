@@ -31,4 +31,8 @@ class OrderService
     public function getAllPaymentStatus(){
         return $this->orderrepo->getAllPaymentStatus();
     }
+
+    public function updateStatus($id, $data){
+        return $this->orderrepo->findUpdateStatus($id, $data);
+    }
 }
