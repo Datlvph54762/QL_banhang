@@ -13,11 +13,25 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        Permission::insert([
-            ['name' => 'view_dashboard'],
-            ['name' => 'manage_users'],
-            ['name' => 'manage_products'],
-            ['name' => 'manage_orders'],
-        ]);
+        $permissions= [
+            ['name' => 'view_product'],
+            ['name' => 'create_product'],
+            ['name' => 'edit_product'],
+            ['name' => 'delete_product'],
+
+            ['name' => 'variant_manage'],
+
+            ['name' => 'view_order'],
+            ['name' => 'update_order_status'],
+            ['name' => 'update_payment_status'],
+
+            ['name' => 'manage_categories'],
+        ];
+
+        foreach($permissions as $permission){
+            Permission::updateOrCreate(
+                ['name'=> $permission['name']], $permission
+            );
+        }
     }
 }
