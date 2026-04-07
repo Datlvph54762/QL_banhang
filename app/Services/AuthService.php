@@ -21,6 +21,10 @@ class AuthService
             if ($user->role_id == 3) {
                 return 'not_authorized';
             }
+
+            if($user->status == 0){
+                return 'disable';
+            }
             Auth::guard('admin')->login($user);
             return 'success';
         }

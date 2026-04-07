@@ -39,6 +39,10 @@ class AuthController extends Controller
             return back()->withErrors(['error' => 'Tài khoản của bạn không có quyền truy cập trang Quản trị!']);
         }
 
+        if ($result === 'disable') {
+            return back()->withErrors(['error' => 'Tài khoản của bạn bị vô hiệu hóa, vui lòng liên hệ Admin!']);
+        }
+
         return back()->withErrors(['error' => 'Incorrect email or password!']);
     }
 
