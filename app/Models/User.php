@@ -45,7 +45,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            // 'password' => 'hashed',
+            'password' => 'hashed',
         ];
     }
 
@@ -59,5 +59,17 @@ class User extends Authenticatable
 
     public function cart(){
         return $this->hasOne(Cart::class);
+    }
+
+    public function canDo($permission){
+        if ($this->role_id == 1) {
+            return true; 
+        }
+
+        if (!$this->role) {
+            return false;
+        }
+
+        return $this->role->permissions->contains('name', $permission);
     }
 }
