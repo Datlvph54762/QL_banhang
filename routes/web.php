@@ -23,62 +23,64 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/dashboard', function () {
-        return view('Admin.dashboard.index');
-    })->name('admin.dashboard');
+        Route::get('/dashboard', function () {
+            return view('Admin.dashboard.index');
+        })->name('admin.dashboard');
 
-    // Quản lý Danh mục (Categories)
-    Route::prefix('categories')->group(function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('admin.categories.index');
-        Route::get('/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-        Route::post('/', [CategoryController::class, 'store'])->name('admin.categories.store');
-        Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
-        Route::put('/{id}', [CategoryController::class, 'update'])->name('admin.categories.update');
-    });
-
-    // Quản lý Sản phẩm (Products & Variants)
-    Route::prefix('products')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('admin.products.index');
-        Route::get('/create', [ProductController::class, 'create'])->name('admin.products.create');
-        Route::post('/', [ProductController::class, 'store'])->name('admin.products.store');
-        Route::get('/{id}/show', [ProductController::class, 'show'])->name('admin.products.show');
-        Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
-        Route::put('/{id}', [ProductController::class, 'update'])->name('admin.products.update');
-
-        // Biến thể sản phẩm (Variants)
-        Route::get('/{id}/variants', [ProductVariant::class, 'index'])->name('admin.products.productVariants.index');
-        Route::get('/{id}/variants/create', [ProductVariant::class, 'create'])->name('admin.products.productVariants.create');
-        Route::post('/variants/store', [ProductVariant::class, 'store'])->name('admin.products.productVariants.store');
-        Route::get('/variants/{id}/edit', [ProductVariant::class, 'edit'])->name('admin.products.productVariants.edit');
-        Route::put('/variants/{id}', [ProductVariant::class, 'update'])->name('admin.products.productVariants.update');
-    });
-
-    // Quản lý Đơn hàng (Orders)
-    Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
-    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
-    Route::put('/edit-status/{id}/', [OrderController::class, 'update'])->name('admin.orders.update');
-
-    // Quản lý Tài khoản & Phân quyền (Accounts)
-    Route::prefix('accounts')->group(function () {
-        // Users & Staffs
-        Route::get('/users', [UserAdminController::class, 'index'])->name('admin.accounts.users.index');
-        Route::prefix('staffs')->group(function () {
-            Route::get('/', [StaffAdminController::class, 'index'])->name('admin.accounts.staffs.index');
-            Route::get('/create', [StaffAdminController::class, 'create'])->name('admin.accounts.staffs.create');
-            Route::post('/store', [StaffAdminController::class, 'store'])->name('admin.accounts.staffs.store');
-            Route::get('/{id}/edit', [StaffAdminController::class, 'edit'])->name('admin.accounts.staffs.edit');
-            Route::put('/{id}', [StaffAdminController::class, 'update'])->name('admin.accounts.staffs.update');
+        // Quản lý Danh mục (Categories)
+        Route::prefix('categories')->group(function () {
+            Route::get('/', [CategoryController::class, 'index'])->name('admin.categories.index');
+            Route::get('/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+            Route::post('/', [CategoryController::class, 'store'])->name('admin.categories.store');
+            Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+            Route::put('/{id}', [CategoryController::class, 'update'])->name('admin.categories.update');
         });
 
-        // Roles & Permissions
-        Route::prefix('roles-permission')->group(function () {
-            Route::get('/', [RoleAdminController::class, 'index'])->name('admin.accounts.roles-permission.index');
-            Route::get('/create', [RoleAdminController::class, 'create'])->name('admin.accounts.roles-permission.create');
-            Route::post('/store', [RoleAdminController::class, 'store'])->name('admin.accounts.roles-permission.store');
-            Route::get('/{id}/edit', [RoleAdminController::class, 'edit'])->name('admin.accounts.roles-permission.edit');
-            Route::put('/{id}', [RoleAdminController::class, 'update'])->name('admin.accounts.roles-permission.update');
+        // Quản lý Sản phẩm (Products & Variants)
+        Route::prefix('products')->group(function () {
+            Route::get('/', [ProductController::class, 'index'])->name('admin.products.index');
+            Route::get('/create', [ProductController::class, 'create'])->name('admin.products.create');
+            Route::post('/', [ProductController::class, 'store'])->name('admin.products.store');
+            Route::get('/{id}/show', [ProductController::class, 'show'])->name('admin.products.show');
+            Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
+            Route::put('/{id}', [ProductController::class, 'update'])->name('admin.products.update');
+
+            // Biến thể sản phẩm (Variants)
+            Route::get('/{id}/variants', [ProductVariant::class, 'index'])->name('admin.products.productVariants.index');
+            Route::get('/{id}/variants/create', [ProductVariant::class, 'create'])->name('admin.products.productVariants.create');
+            Route::post('/variants/store', [ProductVariant::class, 'store'])->name('admin.products.productVariants.store');
+            Route::get('/variants/{id}/edit', [ProductVariant::class, 'edit'])->name('admin.products.productVariants.edit');
+            Route::put('/variants/{id}', [ProductVariant::class, 'update'])->name('admin.products.productVariants.update');
+        });
+
+        // Quản lý Đơn hàng (Orders)
+        Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/orders/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
+        Route::put('/edit-status/{id}/', [OrderController::class, 'update'])->name('admin.orders.update');
+
+        // Quản lý Tài khoản & Phân quyền (Accounts)
+        Route::prefix('accounts')->group(function () {
+            // Users & Staffs
+            Route::get('/users', [UserAdminController::class, 'index'])->name('admin.accounts.users.index');
+            Route::prefix('staffs')->group(function () {
+                Route::get('/', [StaffAdminController::class, 'index'])->name('admin.accounts.staffs.index');
+                Route::get('/create', [StaffAdminController::class, 'create'])->name('admin.accounts.staffs.create');
+                Route::post('/store', [StaffAdminController::class, 'store'])->name('admin.accounts.staffs.store');
+                Route::get('/{id}/edit', [StaffAdminController::class, 'edit'])->name('admin.accounts.staffs.edit');
+                Route::put('/{id}', [StaffAdminController::class, 'update'])->name('admin.accounts.staffs.update');
+            });
+
+            // Roles & Permissions
+            Route::prefix('roles-permission')->group(function () {
+                Route::get('/', [RoleAdminController::class, 'index'])->name('admin.accounts.roles-permission.index');
+                Route::get('/create', [RoleAdminController::class, 'create'])->name('admin.accounts.roles-permission.create');
+                Route::post('/store', [RoleAdminController::class, 'store'])->name('admin.accounts.roles-permission.store');
+                Route::get('/{id}/edit', [RoleAdminController::class, 'edit'])->name('admin.accounts.roles-permission.edit');
+                Route::put('/{id}', [RoleAdminController::class, 'update'])->name('admin.accounts.roles-permission.update');
+            });
         });
     });
 });

@@ -6,8 +6,10 @@
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
             <h5 class="m-0 fw-bold text-primary">Danh sách Sản phẩm</h5>
-            <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Thêm
-                mới</a>
+            @if(auth()->guard('admin')->user()?->canDo('create_product'))
+                <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Thêm
+                    mới</a>
+            @endif
         </div>
         <div class="card-body">
 
@@ -50,18 +52,24 @@
                                 </td>
                                 <td>{{ $product->material }}</td>
                                 <td class="text-end">
-                                    <a href="{{ route('admin.products.productVariants.index', $product->id) }}"
-                                        class="btn btn-sm btn-outline-danger" title="Show_variant">
-                                        <i class="fa-solid fa-layer-group"></i>
-                                    </a>
-                                    <a href="{{ route('admin.products.edit', $product->id) }}"
-                                        class="btn btn-sm btn-outline-warning" title="Sửa">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="{{ route('admin.products.show', $product->id) }}"
-                                        class="btn btn-sm btn-outline-success" title="show">
-                                        <i class="fas fa-eye"></i></i>
-                                    </a>
+                                    @if(auth()->guard('admin')->user()?->canDo('variant.manage'))
+                                        <a href="{{ route('admin.products.productVariants.index', $product->id) }}"
+                                            class="btn btn-sm btn-outline-danger" title="Show_variant">
+                                            <i class="fa-solid fa-layer-group"></i>
+                                        </a>
+                                    @endif
+                                    @if(auth()->guard('admin')->user()?->canDo('edit_product'))
+                                        <a href="{{ route('admin.products.edit', $product->id) }}"
+                                            class="btn btn-sm btn-outline-warning" title="Sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    @endif
+                                    @if(auth()->guard('admin')->user()?->canDo('show_product'))
+                                        <a href="{{ route('admin.products.show', $product->id) }}"
+                                            class="btn btn-sm btn-outline-success" title="show">
+                                            <i class="fas fa-eye"></i></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

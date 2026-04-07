@@ -41,9 +41,11 @@
                                 <td>{{ number_format($order->discount, 0, ',', '.') }}</td>
                                 <td>{{ number_format($order->total_amount, 0, ',', '.') }}</td>
                                 <td class="text-end">
-                                    <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-sm btn-outline-warning" title="Show">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
+                                    @if(auth()->guard('admin')->user()?->canDo('show_order'))
+                                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-sm btn-outline-warning" title="Show">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
