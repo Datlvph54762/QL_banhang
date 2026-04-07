@@ -58,8 +58,9 @@ class StaffAdminController extends Controller
     public function edit($id){
         $user= $this->staffAdminService->findById($id);
         $roles= $this->roleService->getAllRole();
+        $staff= $this->staffAdminService->findById($id);
 
-        return view('admin.accounts.staffs.edit', compact('roles','user'));
+        return view('admin.accounts.staffs.edit', compact('roles','user','staff'));
     }
 
     public function update(Request $request, $id){
@@ -76,6 +77,8 @@ class StaffAdminController extends Controller
             'phone.regex' => 'Số điện thoại không đúng định dạng.',
             'password.confirmed' => 'Mật khẩu xác nhận không khớp.',
         ]);
+
+        $data['status']= $request->has('status') ? 1 : 0;
 
         $this->staffAdminService->update($id, $data);
 

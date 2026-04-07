@@ -43,13 +43,23 @@
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
-                <div class="col-12 mb-3 ">
-                    <label class="form-label fw-bold">Email</label>
-                    <input type="text" name="email" class="form-control" placeholder="Nhập địa chỉ email"
-                        value="{{ $user->email }}">
-                    @error('email')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
+                <div class="d-flex">
+                    <div class="col-6 mb-3 pe-2 ">
+                        <label class="form-label fw-bold">Email</label>
+                        <input type="text" name="email" class="form-control" placeholder="Nhập địa chỉ email"
+                            value="{{ $user->email }}">
+                        @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-6 mb-3 ps-2">
+                        <label class="form-label fw-bold">Phone</label>
+                        <input type="text" name="phone" class="form-control" placeholder="Nhập phone"
+                            value="{{ $user->phone }}">
+                        @error('phone')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="d-flex">
@@ -70,20 +80,23 @@
                     </div>
                 </div>
                 <div class="col-12 mb-3">
-                    <label class="form-label fw-bold">Phone</label>
-                    <input type="text" name="phone" class="form-control" placeholder="Nhập phone"
-                        value="{{ $user->phone }}">
-                    @error('phone')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-                <div class="col-12 mb-3">
                     <label class="form-label fw-bold">Address</label>
                     <input type="text" name="address" class="form-control" placeholder="Nhập địa chỉ"
                         value="{{ $user->address }}">
                     @error('address')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
+                </div>
+
+                <div class="form-group my-3">
+                    <label class="fw-bold">Trạng thái hoạt động</label>
+                    <div class="form-check form-switch mt-2">
+                        <input class="form-check-input" type="checkbox" name="status" id="statusSwitch" 
+                            value="1" {{ $staff->status ? 'checked' : '' }}>
+                        <label class="form-check-label" for="statusSwitch">
+                            Tắt / Bật <small class="text-muted">( Nếu tắt, nhân viên sẽ không thể đăng nhập vào hệ thống )</small>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="text-end">
