@@ -50,7 +50,7 @@
     <div class="d-flex" id="wrapper">
         @include('admin.partials.sidebar')
 
-        <div id="page-content-wrapper" class="w-100 bg-secondary">
+        <div id="page-content-wrapper" class="w-100 bg-light">
             @include('admin.partials.navbar')
 
             <div class="container-fluid p-4 ">

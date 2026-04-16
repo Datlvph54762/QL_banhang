@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductVariant;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\account\UserAdminController;
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\client\AccountClientController;
 use App\Http\Controllers\client\AuthClientController;
 use App\Http\Controllers\client\CartClientController;
@@ -26,10 +27,8 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['auth:admin'])->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-        Route::get('/dashboard', function () {
-            return view('Admin.dashboard.index');
-        })->name('admin.dashboard');
-
+        Route::get('/dashboard', [DashboardController::class,'index'])->name('admin.dashboard.index');
+        
         // Quản lý Danh mục (Categories)
         Route::prefix('categories')->group(function () {
             Route::get('/', [CategoryController::class, 'index'])->name('admin.categories.index');

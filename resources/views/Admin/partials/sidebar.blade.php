@@ -1,9 +1,10 @@
-<div id="sidebar-wrapper" class="bg-light" style="width: 20%;">
+<div id="sidebar-wrapper" class="bg-light border-end
+" style="width: 20%;">
     <div class="sidebar-heading p-3 fs-4 text-body fw-bold "><i class="fas fa-user-shield text-primary"></i>
         Adminator</div>
     <div class="nav flex-column py-3  ">
         @if(auth()->guard('admin')->user()->role_id == 1)
-            <a href="{{ route('admin.dashboard') }}" class="nav-link text-muted fw-bold">
+            <a href="{{ route('admin.dashboard.index') }}" class="nav-link text-muted fw-bold">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
         @else
