@@ -28,6 +28,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::get('/dashboard', [DashboardController::class,'index'])->name('admin.dashboard.index');
+        Route::get('/welcome', [DashboardController::class,'welcome'])->name('admin.dashboard.welcome');
         
         // Quản lý Danh mục (Categories)
         Route::prefix('categories')->group(function () {

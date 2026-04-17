@@ -20,4 +20,9 @@ class DashboardController extends Controller
 
         return view('admin.dashboard.index', $stats);
     }
+
+    public function welcome()
+    {
+        return view('admin.dashboard.welcome');
+    }
 }
