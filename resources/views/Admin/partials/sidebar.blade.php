@@ -60,8 +60,8 @@
 
         <form action="{{ route('logout') }}" method="POST" class="nav-link " onclick="return confirm('Bạn chắc chắn muốn đăng xuất khỏi trang quản trị?')">
             @csrf
-            <button type="submit" class="text-muted fw-bold mt-auto border-0 button-none">
-                <i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+            <button type="submit" class="text-muted fw-bold border-0 bg-transparent p-0 shadow-none">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
             </button>
         </form>
 

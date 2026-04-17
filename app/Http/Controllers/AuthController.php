@@ -32,7 +32,7 @@ class AuthController extends Controller
         $result = $this->authService->checkLogin($request->all());
 
         if ($result==='success') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard.welcome');
         }
 
         if ($result === 'not_authorized') {
